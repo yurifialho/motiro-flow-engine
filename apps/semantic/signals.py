@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from semantic.models import SemanticModel
-from kipco.models import * 
+from apps.semantic.models import SemanticModel
+from apps.kipco.models import * 
 
 logger = logging.getLogger(__name__)
 

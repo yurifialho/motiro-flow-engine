@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from kipco.models import ProcessGoal, Activity, ActivityGoal, Intention, Desire, AgentType, AgentSpecialty, Agent
+from apps.kipco.models import ProcessGoal, Activity, ActivityGoal, Intention, Desire, AgentType, AgentSpecialty, Agent
 
 
 class ProcessGoalSerializer(ModelSerializer):

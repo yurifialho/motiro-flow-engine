@@ -14,5 +14,5 @@ RUN python manage.py migrate
 RUN python manage.py loaddata seed.json
 RUN chmod +x *.sh
 
-EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+EXPOSE 10000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:10000"]

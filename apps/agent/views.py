@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from agent.services.planneragentconn import PlannerAgentConn
+from apps.agent.services.planneragentconn import PlannerAgentConn
 
 
 @api_view(['GET','POST'])

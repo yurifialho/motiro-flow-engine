@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class KipcoConfig(AppConfig):
+class BpmnConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'kipco'
+    name = 'apps.bpmn'

@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from kipco.models import *
-from kipco.serializers import *
+from apps.kipco.models import *
+from apps.kipco.serializers import *
 
 
 @api_view(['GET', 'POST'])

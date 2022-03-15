@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from bpmn.models import *
-from bpmn.serializers import *
-from semantic.models import *
+from apps.bpmn.models import *
+from apps.bpmn.serializers import *
+from apps.semantic.models import *
 
 
 @api_view(['GET', 'POST'])

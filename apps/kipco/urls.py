@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from rest_framework.urlpatterns import format_suffix_patterns
-from kipco import views
-from bpmn import views as bpmnviews
+from apps.kipco import views
+from apps.bpmn import views as bpmnviews
 
 
 urlpatterns = [

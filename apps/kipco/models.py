@@ -1,6 +1,6 @@
 from django.db import models
-from bpmn.models import Activity as BpmnActivity, FlowElementsContainer
-from semantic.models import *
+from apps.bpmn.models import Activity as BpmnActivity, FlowElementsContainer
+from apps.semantic.models import *
 
 class ProcessGoal(SemanticModel):
     name = models.CharField(max_length=100)

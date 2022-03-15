@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  sfdjango:
+  motiro-flow-engine:
     extends:
       file: ./docker-compose.yml
-      service: sfdjango
+      service: motiro-flow-engine
     volumes:
       - .:/usr/src/app:cached

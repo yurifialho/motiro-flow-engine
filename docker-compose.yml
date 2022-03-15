@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  sfdjango:
+  motiro-flow-engine:
     build: .
-    image: unb/sfdjango:2
-    container_name: sfdjango
+    image: motiro-flow-engine
+    container_name: motiro-flow-engine
     ports:
-      - "8000:8000"
+      - "10000:10000"

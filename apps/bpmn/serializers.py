@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from bpmn.models import FlowElement, FlowNode, SequenceFlow, Activity, FlowElementsContainer, Process, Task, SubProcess, EventType, Event, LaneSet, Lane
+from apps.bpmn.models import *
 
 
 class FlowElementSerializer(ModelSerializer):

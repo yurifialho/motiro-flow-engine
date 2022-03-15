@@ -1,4 +1,4 @@
-# SFDjango
+# Motiro Flow-Engine
 
 Funcionalidades atuais:
 
@@ -31,7 +31,7 @@ Executando o projeto:
 
 Usuário Administrador Padrão:
 
-- http://localhost:8000
+- http://localhost:10000
 - Usuário: admin
 - Senha: admin
 

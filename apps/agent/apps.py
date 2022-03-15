@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class BpmnConfig(AppConfig):
+class AgentConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'bpmn'
+    name = 'apps.agent'

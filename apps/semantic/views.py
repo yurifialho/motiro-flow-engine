@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from semantic.models import KipoOntology
+from apps.semantic.models import KipoOntology
 
 @api_view(['POST'])
 def querySPARQ(request):

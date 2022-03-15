@@ -1,4 +1,4 @@
-"""sfdjango2 URL Configuration
+"""flow-engine URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -22,8 +22,8 @@ from django.views.generic.base import RedirectView
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/admin')),
     path('admin/', admin.site.urls),    
-    path('bpmn/', include('bpmn.urls')),
-    path('kipco/', include('kipco.urls')),
-    path('semantic/', include('semantic.urls')),
-    path('agent/',  include('agent.urls'))
+    path('bpmn/', include('apps.bpmn.urls')),
+    path('kipco/', include('apps.kipco.urls')),
+    path('semantic/', include('apps.semantic.urls')),
+    path('agent/',  include('apps.agent.urls'))
 ]

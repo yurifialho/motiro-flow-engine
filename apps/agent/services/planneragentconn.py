@@ -15,7 +15,7 @@ class PlannerAgentConn:
     def sendMessage(self, msg : str) -> None:
 
         if self._agent is None:
-            self._agent = ConnAgentMessage("sfdjango@xmpp-server","sfdjango")
+            self._agent = ConnAgentMessage("flow-engine@xmpp-server","flow-engine")
         future = self._agent.start(auto_register=True)
         #self._agent.b.join()
         print("Finalizado")
@@ -28,7 +28,7 @@ class ConnAgentMessage(Agent):
             msg.set_metadata("performative","inform")
             msg.set_metadata("ontology", "myOntology")
             msg.set_metadata("language","OWL-S")
-            msg.body = "SFDJANGO MESSAGE"
+            msg.body = "flow-engine MESSAGE"
 
             await self.send(msg)
             

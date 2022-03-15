@@ -1,8 +1,10 @@
 from django.db import models
+from django.conf import settings 
+
 from owlready2 import *
 from rdflib import plugin 
 from rdflib.serializer import Serializer
-from django.conf import settings 
+
 
 import rdflib
 import json 
