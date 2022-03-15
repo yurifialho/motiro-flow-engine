@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  motiro-flow-engine:
+  motiro-okara:
     build: .
-    image: motiro-flow-engine
-    container_name: motiro-flow-engine
+    image: motiro-okara
+    container_name: motiro-okara
     ports:
       - "10000:10000"

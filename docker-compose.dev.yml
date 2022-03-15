@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  motiro-flow-engine:
+  motiro-okara:
     extends:
       file: ./docker-compose.yml
-      service: motiro-flow-engine
+      service: motiro-okara
     volumes:
       - .:/usr/src/app:cached
