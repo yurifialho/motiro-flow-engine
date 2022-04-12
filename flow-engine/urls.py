@@ -18,6 +18,7 @@ from django.urls import path
 from django.urls import include, path
 from django.conf.urls import url
 from django.views.generic.base import RedirectView
+from .views import CustomAuthToken
 
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/admin')),
@@ -25,5 +26,6 @@ urlpatterns = [
     path('bpmn/', include('apps.bpmn.urls')),
     path('kipco/', include('apps.kipco.urls')),
     path('semantic/', include('apps.semantic.urls')),
-    path('agent/',  include('apps.agent.urls'))
+    path('agent/',  include('apps.agent.urls')),
+    path('api-token-auth', CustomAuthToken.as_view())
 ]

@@ -41,15 +41,20 @@ INSTALLED_APPS = [
     'django_extensions',
     'drf_generators',
     'rest_framework',
+    'rest_framework.authtoken',
     'apps.bpmn', 
     'apps.kipco',
     'apps.semantic',
     'apps.agent',
+    
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 25,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }
 
 MIDDLEWARE = [
@@ -153,7 +158,7 @@ SEMANTIC = {
         'NAME' : BASE_DIR / 'databases' / 'semantic.sqlite3',
     },
     'OWL_FILES': {
-        'IMPORT_FOLDER': BASE_DIR / './owl_files/',
-        'OWL_PATH_FILE': 'file:/' + str(BASE_DIR / '/owl_files/kipo_s.owl#')
+        'IMPORT_FOLDER': './owl_files/',
+        'OWL_PATH_FILE': 'file:/' + str('./owl_files/kipo_s.owl#')
     }
 }

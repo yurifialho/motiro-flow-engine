@@ -15,9 +15,10 @@ import threading
 # ---
 logger = logging.getLogger(__name__)
 
+
 class KipoOntology:
     _lock = threading.Lock()
- 
+
     @classmethod
     def loadConfig(cls):
         with cls._lock:
@@ -29,11 +30,12 @@ class KipoOntology:
                         cls._world = World(filename= settings.SEMANTIC["DATABASE"]["NAME"], exclusive=False)
                         onto_path.append(settings.SEMANTIC["OWL_FILES"]["IMPORT_FOLDER"])
                         cls._kipo = cls._world.get_ontology(settings.SEMANTIC["OWL_FILES"]["OWL_PATH_FILE"]).load()
-                        sync_reasoner_pellet(x = cls._world, infer_property_values=True)
+                        # sync_reasoner_pellet(x = cls._world, infer_property_values=True)
                         cls._world.save()                                                
                         loaded = cls._kipo.loaded
                     except Exception as e:
                         tries += 1
+                        logger.info(settings.SEMANTIC["OWL_FILES"]["OWL_PATH_FILE"])
                         logger.error('Connot load owl file! [Retrying in ' + str(tries*5) + ' sec]')
                         logger.error(e)
                         time.sleep(tries*5)
@@ -43,7 +45,7 @@ class KipoOntology:
         if not hasattr(cls, '_kipo'):
             cls.loadConfig()
         return cls._kipo
-    
+
     @classmethod
     def getWorld(cls):
         if not hasattr(cls, '_world'):

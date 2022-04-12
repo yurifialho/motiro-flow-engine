@@ -1,11 +1,61 @@
 from rest_framework.decorators import api_view
+from rest_framework.decorators import authentication_classes
+from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from apps.bpmn import serializers
 
+from apps.kipco.models import ProcessGoal, IntensiveProcess, AgentType, AgentSpecialty
+from apps.kipco.serializers import ProcessGoalSerializer, IntensiveProcessSerializer, AgentTypeSerializer, AgentSpecialtySerializer
 from apps.kipco.models import *
 from apps.kipco.serializers import *
 
 
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def intensive_process_list(request):
+    if request.method == 'GET':
+        items = IntensiveProcess.objects.order_by("name")
+        serializer = IntensiveProcessSerializer(items, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = IntensiveProcessSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def intensive_process_detail(request, pk):
+    try:
+        item = IntensiveProcess.objects.get(pk=pk)
+    except IntensiveProcess.DoesNotExist:
+        return Response(status=404)
+
+    if request.method == 'GET':
+        serializer = IntensiveProcessSerializer(item)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = IntensiveProcessSerializer(item, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        item.delete()
+        return Response(status=204)
+
+
+@api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def processgoal_list(request):
     if request.method == 'GET':
         items = ProcessGoal.objects.order_by('pk')
@@ -19,15 +69,18 @@ def processgoal_list(request):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
+
 @api_view(['GET'])
 def processgoalowl_list(request):
     if request.method == 'GET':
         items = ProcessGoal.Owl().list()
         serializer = ProcessGoalSerializer(items, many=True)
         return Response(serializer.data)
-        
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def processgoal_detail(request, pk):
     try:
         item = ProcessGoal.objects.get(pk=pk)
@@ -215,6 +268,8 @@ def desire_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def agenttype_list(request):
     if request.method == 'GET':
         items = AgentType.objects.order_by('pk')
@@ -230,6 +285,8 @@ def agenttype_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def agenttype_detail(request, pk):
     try:
         item = AgentType.objects.get(pk=pk)
@@ -253,12 +310,13 @@ def agenttype_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def agentspecialty_list(request):
     if request.method == 'GET':
         items = AgentSpecialty.objects.order_by('pk')
         serializer = AgentSpecialtySerializer(items, many=True)
         return Response(serializer.data)
-
     elif request.method == 'POST':
         serializer = AgentSpecialtySerializer(data=request.data)
         if serializer.is_valid():
@@ -268,6 +326,8 @@ def agentspecialty_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def agentspecialty_detail(request, pk):
     try:
         item = AgentSpecialty.objects.get(pk=pk)

@@ -5,7 +5,8 @@ from apps.bpmn import views as bpmnviews
 
 
 urlpatterns = [
-
+    url(r'^process/(?P<pk>[0-9]+)/$', views.intensive_process_detail),
+    url(r'^process/$', views.intensive_process_list),
     url(r'^process/owl/$', bpmnviews.flowelementscontainerowl_list),
     
     url(r'^processgoal/(?P<pk>[0-9]+)/$', views.processgoal_detail),

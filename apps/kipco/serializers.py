@@ -1,5 +1,12 @@
 from rest_framework.serializers import ModelSerializer
-from apps.kipco.models import ProcessGoal, Activity, ActivityGoal, Intention, Desire, AgentType, AgentSpecialty, Agent
+from apps.kipco.models import IntensiveProcess, ProcessGoal, Activity, ActivityGoal, Intention, Desire, AgentType, AgentSpecialty, Agent
+
+
+class IntensiveProcessSerializer(ModelSerializer):
+
+    class Meta:
+        model = IntensiveProcess
+        fields = '__all__'
 
 
 class ProcessGoalSerializer(ModelSerializer):

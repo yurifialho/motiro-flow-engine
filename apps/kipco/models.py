@@ -1,80 +1,94 @@
 from django.db import models
 from apps.bpmn.models import Activity as BpmnActivity, FlowElementsContainer
-from apps.semantic.models import *
+from apps.semantic.models import SemanticModel
+
 
 class ProcessGoal(SemanticModel):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
+
     semanticClass = 'KIPCO__Process_Goal'
 
     def __str__(self):
         return self.name
 
+
 class IntensiveProcess(SemanticModel, FlowElementsContainer):
 
     goal = models.ForeignKey(ProcessGoal, on_delete=models.CASCADE, blank=True, null=True)
+
     semanticClass = 'KIPCO__Knowledge_Intensive_Process'
 
     def setIndividualProperties(self, owl):
         if self.goal and self.goal.getIndividual():
             owl.has.append(self.goal.getIndividual())
 
-class Activity(BpmnActivity):
-    pass    
+
+class Activity(SemanticModel, BpmnActivity):
+
+    semanticClass = 'KIPCO__Knowledge_Intensive_Activity'
 
 
-
-class ActivityGoal(models.Model):
+class ActivityGoal(SemanticModel):
     name = models.CharField(max_length=100)
-    description = models.TextField()
-    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE, blank=True, null=True)
+
+    semanticClass = 'KIPCO__Activity_Goal'
 
     def __str__(self):
         return self.name
     
 
-class Intention(models.Model):
+class Intention(SemanticModel):
     name = models.CharField(max_length=100)
-    description = models.TextField()
-    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE, blank=True, null=True)
 
-    def __str__(self):
-        return self.name
-
-class Desire(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    intention = models.ForeignKey(Intention, on_delete=models.CASCADE)
+    semanticClass = 'Intention'    
 
     def __str__(self):
         return self.name
 
 
-class AgentType(models.Model):
+class Desire(SemanticModel):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
+    intention = models.ForeignKey(Intention, on_delete=models.CASCADE, blank=True, null=True)
+
+    semanticClass = 'KIPCO__Desire'
 
     def __str__(self):
         return self.name
 
 
-class AgentSpecialty(models.Model):
+class AgentType(SemanticModel):
     name = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
+
+    semanticClass = 'KIPCO__Knowledge_Intensive_Process'
 
     def __str__(self):
         return self.name
 
 
-class Agent(models.Model):
+class AgentSpecialty(SemanticModel):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+
+    semanticClass = 'KIPCO__Specialty'
+
+    def __str__(self):
+        return self.name
+
+
+class Agent(SemanticModel):
     name = models.CharField(max_length=100)
     specialties = models.ManyToManyField(AgentSpecialty)
     desires = models.ManyToManyField(Desire)
-    type = models.ForeignKey(AgentType, on_delete=models.CASCADE)
+    type = models.ForeignKey(AgentType, on_delete=models.CASCADE, blank=True, null=True)
+
+    semanticClass = 'KIPCO__Agent'
 
     def __str__(self):
         return self.name
-
-
-
-
