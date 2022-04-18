@@ -6,3 +6,7 @@ services:
       service: motiro-okara
     volumes:
       - .:/usr/src/app:cached
+
+networks: 
+  motiro-nw:
+    name: "motiro-nw"

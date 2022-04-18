@@ -6,3 +6,9 @@ services:
     container_name: motiro-okara
     ports:
       - "10000:10000"
+    networks:
+      - motiro-nw
+
+networks: 
+  motiro-nw:
+    name: "motiro-nw"
