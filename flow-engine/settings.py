@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-t*&%q(=_fzgfws)%ur%=jb!e5z#ci47hw!iq$%(t5t$xrl&_&m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['motiro-okara', 'localhost']
 
 
 # Application definition

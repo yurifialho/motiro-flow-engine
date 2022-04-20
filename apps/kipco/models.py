@@ -15,7 +15,10 @@ class ProcessGoal(SemanticModel):
 
 class IntensiveProcess(SemanticModel, FlowElementsContainer):
 
-    goal = models.ForeignKey(ProcessGoal, on_delete=models.CASCADE, blank=True, null=True)
+    goal = models.ForeignKey(ProcessGoal,
+                             on_delete=models.CASCADE,
+                             blank=True,
+                             null=True)
 
     semanticClass = 'KIPCO__Knowledge_Intensive_Process'
 
@@ -32,20 +35,26 @@ class Activity(SemanticModel, BpmnActivity):
 class ActivityGoal(SemanticModel):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    activity = models.ForeignKey(Activity, on_delete=models.CASCADE, blank=True, null=True)
+    activity = models.ForeignKey(Activity,
+                                 on_delete=models.CASCADE,
+                                 blank=True,
+                                 null=True)
 
     semanticClass = 'KIPCO__Activity_Goal'
 
     def __str__(self):
         return self.name
-    
+
 
 class Intention(SemanticModel):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    activity = models.ForeignKey(Activity, on_delete=models.CASCADE, blank=True, null=True)
+    activity = models.ForeignKey(Activity,
+                                 on_delete=models.CASCADE,
+                                 blank=True,
+                                 null=True)
 
-    semanticClass = 'Intention'    
+    semanticClass = 'Intention'
 
     def __str__(self):
         return self.name
@@ -54,7 +63,10 @@ class Intention(SemanticModel):
 class Desire(SemanticModel):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    intention = models.ForeignKey(Intention, on_delete=models.CASCADE, blank=True, null=True)
+    intention = models.ForeignKey(Intention,
+                                  on_delete=models.CASCADE,
+                                  blank=True,
+                                  null=True)
 
     semanticClass = 'KIPCO__Desire'
 
@@ -86,7 +98,10 @@ class Agent(SemanticModel):
     name = models.CharField(max_length=100)
     specialties = models.ManyToManyField(AgentSpecialty)
     desires = models.ManyToManyField(Desire)
-    type = models.ForeignKey(AgentType, on_delete=models.CASCADE, blank=True, null=True)
+    type = models.ForeignKey(AgentType,
+                             on_delete=models.CASCADE,
+                             blank=True,
+                             null=True)
 
     semanticClass = 'KIPCO__Agent'
 
