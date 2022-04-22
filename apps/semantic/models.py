@@ -1,17 +1,11 @@
-from django.db import models
-from django.conf import settings 
-
-from owlready2 import *
-from rdflib import plugin 
-from rdflib.serializer import Serializer
-
-
-import rdflib
-import json 
 import time
 import logging
 import threading
-
+from django.db import models
+from django.conf import settings
+from owlready2 import *
+from rdflib import plugin 
+from rdflib.serializer import Serializer
 # ---
 logger = logging.getLogger(__name__)
 
@@ -27,11 +21,11 @@ class KipoOntology:
                 tries = 0
                 while not loaded and tries < 4:
                     try:
-                        cls._world = World(filename= settings.SEMANTIC["DATABASE"]["NAME"], exclusive=False)
+                        cls._world = World(filename=settings.SEMANTIC["DATABASE"]["NAME"], exclusive=False)
                         onto_path.append(settings.SEMANTIC["OWL_FILES"]["IMPORT_FOLDER"])
                         cls._kipo = cls._world.get_ontology(settings.SEMANTIC["OWL_FILES"]["OWL_PATH_FILE"]).load()
-                        # sync_reasoner_pellet(x = cls._world, infer_property_values=True)
-                        cls._world.save()                                                
+                        sync_reasoner_pellet(x = cls._world, infer_property_values=True)
+                        cls._world.save()
                         loaded = cls._kipo.loaded
                     except Exception as e:
                         tries += 1
@@ -64,28 +58,29 @@ class KipoOntology:
             return list(l)
         except Exception:
             return None
-    
+
+
 class SemanticModel(models.Model):
 
     storid = models.IntegerField(unique=False, blank=True, null=True)
     semanticClass = 'Thing'
-    
+
     def listObj(self) -> list:
         lista = []
         for k in self.listOwl():
             lista.append(self.owlToObj(k))
         return lista
-    
+
     def listOwl(self) -> list:
         kipo = KipoOntology.getOntology()
-        lista = kipo.search(type = self.getSemanticClass())
+        lista = kipo.search(type=self.getSemanticClass())
         return lista
 
     def owlToObj(self, owlObj):
         pg = self.__class__()
         pg.name = owlObj.name
         return pg
-    
+
     def objToOwl(self):
         kipo = KipoOntology.getOntology()
         with kipo:
@@ -99,10 +94,10 @@ class SemanticModel(models.Model):
             return True
         else:        
             return False
-    
+
     def getIndividual(self) :
         kipo = KipoOntology.getOntology()
-        for o in kipo.search(type = self.getSemanticClass()):
+        for o in kipo.search(type=self.getSemanticClass()):
             if o.name == self.name:
                 return o
         return None
@@ -113,8 +108,9 @@ class SemanticModel(models.Model):
             if i.name == self.semanticClass:
                 return i
         return None
-    
-    def setIndividualProperties(self, owl) :
+
+    def setIndividualProperties(self, owl):
         pass
+
     class Meta:
         abstract = True

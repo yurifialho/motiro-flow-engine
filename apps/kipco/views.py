@@ -5,9 +5,18 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from apps.bpmn import serializers
-
-from apps.kipco.models import ProcessGoal, IntensiveProcess, AgentType, AgentSpecialty
-from apps.kipco.serializers import ProcessGoalSerializer, IntensiveProcessSerializer, AgentTypeSerializer, AgentSpecialtySerializer
+from apps.kipco.models import ProcessGoal
+from apps.kipco.models import ActivityGoal
+from apps.kipco.models import IntensiveProcess
+from apps.kipco.models import AgentType
+from apps.kipco.models import AgentSpecialty
+from apps.kipco.models import Activity
+from apps.kipco.serializers import ProcessGoalSerializer
+from apps.kipco.serializers import ActivityGoalSerializer
+from apps.kipco.serializers import IntensiveProcessSerializer
+from apps.kipco.serializers import AgentTypeSerializer
+from apps.kipco.serializers import AgentSpecialtySerializer
+from apps.kipco.serializers import ActivitySerializer
 from apps.kipco.models import *
 from apps.kipco.serializers import *
 
@@ -117,12 +126,21 @@ def activity_list(request):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
+
+@api_view(['GET'])
+def activity_by_process_list(request, pk):
+    items = Activity.objects.filter(container=pk)
+    serializer = ActivitySerializer(items, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['GET'])
 def activityowl_list(request):
     if request.method == 'GET':
         items = Activity.Owl().list()
         serializer = ActivitySerializer(items, many=True)
         return Response(serializer.data)
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def activity_detail(request, pk):
@@ -161,12 +179,14 @@ def activitygoal_list(request):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
+
 @api_view(['GET'])
 def activitygoalowl_list(request):
     if request.method == 'GET':
         items = ActivityGoal.Owl().list()
         serializer = ActivityGoalSerializer(items, many=True)
         return Response(serializer.data)
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def activitygoal_detail(request, pk):

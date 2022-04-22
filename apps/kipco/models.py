@@ -16,7 +16,7 @@ class ProcessGoal(SemanticModel):
 class IntensiveProcess(SemanticModel, FlowElementsContainer):
 
     goal = models.ForeignKey(ProcessGoal,
-                             on_delete=models.CASCADE,
+                             on_delete=models.SET_NULL,
                              blank=True,
                              null=True)
 
@@ -27,20 +27,24 @@ class IntensiveProcess(SemanticModel, FlowElementsContainer):
             owl.has.append(self.goal.getIndividual())
 
 
-class Activity(SemanticModel, BpmnActivity):
-
-    semanticClass = 'KIPCO__Knowledge_Intensive_Activity'
-
-
 class ActivityGoal(SemanticModel):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    activity = models.ForeignKey(Activity,
-                                 on_delete=models.CASCADE,
-                                 blank=True,
-                                 null=True)
 
     semanticClass = 'KIPCO__Activity_Goal'
+
+    def __str__(self):
+        return self.name
+
+
+class Activity(SemanticModel, BpmnActivity):
+
+    goal = models.ForeignKey(ActivityGoal,
+                             on_delete=models.SET_NULL,
+                             blank=True,
+                             null=True)
+
+    semanticClass = 'KIPCO__Knowledge_Intensive_Activity'
 
     def __str__(self):
         return self.name
@@ -96,8 +100,8 @@ class AgentSpecialty(SemanticModel):
 
 class Agent(SemanticModel):
     name = models.CharField(max_length=100)
-    specialties = models.ManyToManyField(AgentSpecialty)
-    desires = models.ManyToManyField(Desire)
+    specialties = models.ManyToManyField(AgentSpecialty, blank=True)
+    desires = models.ManyToManyField(Desire, blank=True)
     type = models.ForeignKey(AgentType,
                              on_delete=models.CASCADE,
                              blank=True,
@@ -107,3 +111,75 @@ class Agent(SemanticModel):
 
     def __str__(self):
         return self.name
+
+
+class DataObject(SemanticModel):
+    data = models.TextField(max_length=1000)
+
+    semanticClass = "BPO__Data_Object"
+
+    def __str__(self):
+        return self.name
+
+
+class Association(SemanticModel):
+    activity = models.ForeignKey(Activity,
+                                 on_delete=models.CASCADE)
+    data_objects = models.ForeignKey(DataObject,
+                                     on_delete=models.CASCADE)
+
+    semanticClass = "BPO__Association"
+
+    def __str__(self):
+        return self.name
+
+
+class Message(SemanticModel):
+    data = models.TextField(max_length=1000)
+    data_object = models.ManyToManyField(DataObject,
+                                         blank=True)
+
+    semanticClass = "CO__COM__Message"
+
+    def __str__(self):
+        return self.name
+
+
+class Socialization(SemanticModel):
+    communications = models.ManyToManyField(Message,
+                                            blank=True)
+    perceptions = models.ManyToManyField(Agent,
+                                         blank=True)
+
+    semanticClass = "KIPCO__Socialization"
+
+    def __str__(self):
+        return self.name
+
+
+class MessageFlow(SemanticModel):
+    association = models.OneToOneField(Association,
+                                       on_delete=models.CASCADE)
+    source = models.ForeignKey(Activity,
+                               related_name='msg_outgoing',
+                               on_delete=models.CASCADE)
+    target = models.ForeignKey(Activity,
+                               related_name='msg_incoming',
+                               on_delete=models.CASCADE,
+                               blank=True,
+                               null=True)
+
+    messages = models.ManyToManyField(Message,
+                                      blank=True)
+    socializations = models.ManyToManyField(Socialization,
+                                            blank=True)
+
+    semanticClass = "BPO__Message_Flow"
+
+    def __str__(self):
+        return self.name
+
+
+
+
+
