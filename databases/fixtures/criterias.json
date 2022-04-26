@@ -1,0 +1,434 @@
+[
+  {
+    "model": "assessment.criteria",
+    "pk": 13,
+    "fields": {
+      "level": 1,
+      "sigla": "BC1",
+      "criteria": "Modelled or Documented"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 14,
+    "fields": {
+      "level": 1,
+      "sigla": "BT1",
+      "criteria": "Basic IT infrastructure in place"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 15,
+    "fields": {
+      "level": 1,
+      "sigla": "BO1",
+      "criteria": "Organisation structure is defined and in place"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 16,
+    "fields": {
+      "level": 1,
+      "sigla": "PC1",
+      "criteria": "Modelled or Documented"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 17,
+    "fields": {
+      "level": 1,
+      "sigla": "PT1",
+      "criteria": "IT support for process. Ad hoc exchange of process information"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 18,
+    "fields": {
+      "level": 1,
+      "sigla": "PO1",
+      "criteria": "Responsibilities/authorities defined and in place"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 19,
+    "fields": {
+      "level": 1,
+      "sigla": "SC1",
+      "criteria": "Modelled or Documented"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 20,
+    "fields": {
+      "level": 1,
+      "sigla": "ST1",
+      "criteria": "Applications/services connectable. Ad hoc information exchange possible"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 21,
+    "fields": {
+      "level": 1,
+      "sigla": "SO1",
+      "criteria": "Responsibilities/authorities defined and in place"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 22,
+    "fields": {
+      "level": 1,
+      "sigla": "DC1",
+      "criteria": "Modelled or Documented"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 23,
+    "fields": {
+      "level": 1,
+      "sigla": "DT1",
+      "criteria": "Data storage devices connectable, simple electronic exchange possible"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 24,
+    "fields": {
+      "level": 1,
+      "sigla": "DO1",
+      "criteria": "Responsibilities/authorities defined and in place"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 25,
+    "fields": {
+      "level": 2,
+      "sigla": "BC2",
+      "criteria": "Use of standards for alignment with other models"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 26,
+    "fields": {
+      "level": 2,
+      "sigla": "BT2",
+      "criteria": "Standard and configurable IT infrastructures"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 27,
+    "fields": {
+      "level": 2,
+      "sigla": "BO2",
+      "criteria": "Human resources trained for interoperability"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 28,
+    "fields": {
+      "level": 2,
+      "sigla": "PC2",
+      "criteria": "Use of standards for alignment with other models"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 29,
+    "fields": {
+      "level": 2,
+      "sigla": "PT2",
+      "criteria": "Standard process tools & platforms"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 30,
+    "fields": {
+      "level": 2,
+      "sigla": "PO2",
+      "criteria": "Procedures for processes interoperability"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 31,
+    "fields": {
+      "level": 2,
+      "sigla": "SC2",
+      "criteria": "Use of standards for alignment with other models"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 32,
+    "fields": {
+      "level": 2,
+      "sigla": "ST2",
+      "criteria": "Standard and configurable architecture & interface"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 33,
+    "fields": {
+      "level": 2,
+      "sigla": "SO2",
+      "criteria": "Procedures for processes interoperability"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 34,
+    "fields": {
+      "level": 2,
+      "sigla": "DC2",
+      "criteria": "Use of standards for alignment with other models"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 35,
+    "fields": {
+      "level": 2,
+      "sigla": "DT2",
+      "criteria": "Automated access to data, based on standard protocols"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 36,
+    "fields": {
+      "level": 2,
+      "sigla": "DO2",
+      "criteria": "Rules and methods for data management"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 37,
+    "fields": {
+      "level": 3,
+      "sigla": "BC3",
+      "criteria": "Business models for multi partnership and collaborative enterprise"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 38,
+    "fields": {
+      "level": 3,
+      "sigla": "BT3",
+      "criteria": "Open IT infrastructure"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 39,
+    "fields": {
+      "level": 3,
+      "sigla": "BO3",
+      "criteria": "Flexible organisation structure"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 40,
+    "fields": {
+      "level": 3,
+      "sigla": "PC3",
+      "criteria": "Meta-modelling for multiple model mappings"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 41,
+    "fields": {
+      "level": 3,
+      "sigla": "PT3",
+      "criteria": "Platform & tool for collaborative execution of processes"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 42,
+    "fields": {
+      "level": 3,
+      "sigla": "PO3",
+      "criteria": "Cross-enterprise collaborative processes management"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 43,
+    "fields": {
+      "level": 3,
+      "sigla": "SC3",
+      "criteria": "Meta-modelling for multiple model mappings"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 44,
+    "fields": {
+      "level": 3,
+      "sigla": "ST3",
+      "criteria": "Automated services discovery and composition, shared applications"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 45,
+    "fields": {
+      "level": 3,
+      "sigla": "SO3",
+      "criteria": "Collaborative services and application management"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 46,
+    "fields": {
+      "level": 3,
+      "sigla": "DC3",
+      "criteria": "Meta-modelling for multiple model mappings"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 47,
+    "fields": {
+      "level": 3,
+      "sigla": "DT3",
+      "criteria": "Remote access to databases possible for applications, shared data"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 48,
+    "fields": {
+      "level": 3,
+      "sigla": "DO3",
+      "criteria": "Personalised data management for different partners"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 49,
+    "fields": {
+      "level": 4,
+      "sigla": "BC4",
+      "criteria": "Adaptive business model"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 50,
+    "fields": {
+      "level": 4,
+      "sigla": "BT4",
+      "criteria": "Adaptive IT infrastructure"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 51,
+    "fields": {
+      "level": 4,
+      "sigla": "BO4",
+      "criteria": "Agile organisation for on-demand business"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 52,
+    "fields": {
+      "level": 4,
+      "sigla": "PC4",
+      "criteria": "Modelling for dynamic process reengineering"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 53,
+    "fields": {
+      "level": 4,
+      "sigla": "PT4",
+      "criteria": "Dynamic and adaptive tools and engines for processes"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 54,
+    "fields": {
+      "level": 4,
+      "sigla": "PO4",
+      "criteria": "Real-time monitoring of processes, adaptive procedures"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 55,
+    "fields": {
+      "level": 4,
+      "sigla": "SC4",
+      "criteria": "Adaptive service modelling"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 56,
+    "fields": {
+      "level": 4,
+      "sigla": "ST4",
+      "criteria": "Dynamically composable services, networked applications"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 57,
+    "fields": {
+      "level": 4,
+      "sigla": "SO4",
+      "criteria": "Dynamic service and application management rules and methods"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 58,
+    "fields": {
+      "level": 4,
+      "sigla": "DC4",
+      "criteria": "Adaptive data models (both syntax and semantics)"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 59,
+    "fields": {
+      "level": 4,
+      "sigla": "DT4",
+      "criteria": "Direct database exchanges capability and full data conversion tool"
+    }
+  },
+  {
+    "model": "assessment.criteria",
+    "pk": 60,
+    "fields": {
+      "level": 4,
+      "sigla": "DO4",
+      "criteria": "Adaptive data management rules and methods"
+    }
+  }
+]

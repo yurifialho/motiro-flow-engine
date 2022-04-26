@@ -42,10 +42,11 @@ INSTALLED_APPS = [
     'drf_generators',
     'rest_framework',
     'rest_framework.authtoken',
-    'apps.bpmn', 
+    'apps.bpmn',
     'apps.kipco',
     'apps.semantic',
     'apps.agent',
+    'apps.assessment',
     
 ]
 

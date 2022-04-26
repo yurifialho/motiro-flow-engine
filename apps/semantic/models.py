@@ -24,7 +24,7 @@ class KipoOntology:
                         cls._world = World(filename=settings.SEMANTIC["DATABASE"]["NAME"], exclusive=False)
                         onto_path.append(settings.SEMANTIC["OWL_FILES"]["IMPORT_FOLDER"])
                         cls._kipo = cls._world.get_ontology(settings.SEMANTIC["OWL_FILES"]["OWL_PATH_FILE"]).load()
-                        sync_reasoner_pellet(x = cls._world, infer_property_values=True)
+                        #sync_reasoner_pellet(x = cls._world, infer_property_values=True)
                         cls._world.save()
                         loaded = cls._kipo.loaded
                     except Exception as e:

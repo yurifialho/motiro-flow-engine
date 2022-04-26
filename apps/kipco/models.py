@@ -37,47 +37,6 @@ class ActivityGoal(SemanticModel):
         return self.name
 
 
-class Activity(SemanticModel, BpmnActivity):
-
-    goal = models.ForeignKey(ActivityGoal,
-                             on_delete=models.SET_NULL,
-                             blank=True,
-                             null=True)
-
-    semanticClass = 'KIPCO__Knowledge_Intensive_Activity'
-
-    def __str__(self):
-        return self.name
-
-
-class Intention(SemanticModel):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    activity = models.ForeignKey(Activity,
-                                 on_delete=models.CASCADE,
-                                 blank=True,
-                                 null=True)
-
-    semanticClass = 'Intention'
-
-    def __str__(self):
-        return self.name
-
-
-class Desire(SemanticModel):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True, null=True)
-    intention = models.ForeignKey(Intention,
-                                  on_delete=models.CASCADE,
-                                  blank=True,
-                                  null=True)
-
-    semanticClass = 'KIPCO__Desire'
-
-    def __str__(self):
-        return self.name
-
-
 class AgentType(SemanticModel):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
@@ -98,6 +57,46 @@ class AgentSpecialty(SemanticModel):
         return self.name
 
 
+class DataObject(SemanticModel):
+    data = models.TextField(max_length=1000)
+
+    semanticClass = "BPO__Data_Object"
+
+    def __str__(self):
+        return self.name
+
+
+class Message(SemanticModel):
+    data = models.TextField(max_length=1000)
+    objects = models.ManyToManyField(DataObject,
+                                     blank=True)
+
+    semanticClass = "CO__COM__Message"
+
+    def __str__(self):
+        return self.name
+
+
+class Intention(SemanticModel):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+    goals = models.ManyToManyField(ActivityGoal,
+                                   blank=True)
+
+    semanticClass = 'Intention'
+
+    def __str__(self):
+        return self.name
+
+
+class Desire(Intention):
+
+    semanticClass = 'KIPCO__Desire'
+
+    def __str__(self):
+        return self.name
+
+
 class Agent(SemanticModel):
     name = models.CharField(max_length=100)
     specialties = models.ManyToManyField(AgentSpecialty, blank=True)
@@ -113,10 +112,29 @@ class Agent(SemanticModel):
         return self.name
 
 
-class DataObject(SemanticModel):
-    data = models.TextField(max_length=1000)
+class Socialization(SemanticModel):
+    communications = models.ManyToManyField(Message,
+                                            blank=True)
+    perceptions = models.ManyToManyField(Agent,
+                                         blank=True)
 
-    semanticClass = "BPO__Data_Object"
+    semanticClass = "KIPCO__Socialization"
+
+    def __str__(self):
+        return self.name
+
+
+class Activity(SemanticModel, BpmnActivity):
+    agent = models.ForeignKey(Agent,
+                              on_delete=models.SET_NULL,
+                              blank=True,
+                              null=True)
+    goal = models.ForeignKey(ActivityGoal,
+                             on_delete=models.SET_NULL,
+                             blank=True,
+                             null=True)
+
+    semanticClass = 'KIPCO__Knowledge_Intensive_Activity'
 
     def __str__(self):
         return self.name
@@ -129,29 +147,6 @@ class Association(SemanticModel):
                                      on_delete=models.CASCADE)
 
     semanticClass = "BPO__Association"
-
-    def __str__(self):
-        return self.name
-
-
-class Message(SemanticModel):
-    data = models.TextField(max_length=1000)
-    data_object = models.ManyToManyField(DataObject,
-                                         blank=True)
-
-    semanticClass = "CO__COM__Message"
-
-    def __str__(self):
-        return self.name
-
-
-class Socialization(SemanticModel):
-    communications = models.ManyToManyField(Message,
-                                            blank=True)
-    perceptions = models.ManyToManyField(Agent,
-                                         blank=True)
-
-    semanticClass = "KIPCO__Socialization"
 
     def __str__(self):
         return self.name
@@ -178,8 +173,3 @@ class MessageFlow(SemanticModel):
 
     def __str__(self):
         return self.name
-
-
-
-
-

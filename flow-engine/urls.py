@@ -27,5 +27,6 @@ urlpatterns = [
     path('kipco/', include('apps.kipco.urls')),
     path('semantic/', include('apps.semantic.urls')),
     path('agent/',  include('apps.agent.urls')),
+    path('assessment/',  include('apps.assessment.urls')),
     path('api-token-auth', CustomAuthToken.as_view())
 ]
