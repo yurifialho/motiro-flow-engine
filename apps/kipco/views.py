@@ -4,21 +4,26 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from apps.bpmn import serializers
 from apps.kipco.models import ProcessGoal
 from apps.kipco.models import ActivityGoal
 from apps.kipco.models import IntensiveProcess
 from apps.kipco.models import AgentType
 from apps.kipco.models import AgentSpecialty
 from apps.kipco.models import Activity
+from apps.kipco.models import Socialization
+from apps.kipco.models import Intention
+from apps.kipco.models import Agent
+from apps.kipco.models import Desire
 from apps.kipco.serializers import ProcessGoalSerializer
 from apps.kipco.serializers import ActivityGoalSerializer
 from apps.kipco.serializers import IntensiveProcessSerializer
 from apps.kipco.serializers import AgentTypeSerializer
 from apps.kipco.serializers import AgentSpecialtySerializer
 from apps.kipco.serializers import ActivitySerializer
-from apps.kipco.models import *
-from apps.kipco.serializers import *
+from apps.kipco.serializers import IntentionSerializer
+from apps.kipco.serializers import AgentSerializer
+from apps.kipco.serializers import DesireSerializer
+from apps.kipco.serializers import SocializationSerializer
 
 
 @api_view(['GET', 'POST'])
@@ -398,6 +403,44 @@ def agent_detail(request, pk):
 
     elif request.method == 'PUT':
         serializer = AgentSerializer(item, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        item.delete()
+        return Response(status=204)
+
+
+@api_view(['GET', 'POST'])
+def socialization_list(request):
+    if request.method == 'GET':
+        items = Socialization.objects.order_by('pk')
+        serializer = SocializationSerializer(items, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = SocializationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def socialization_detail(request, pk):
+    try:
+        item = Socialization.objects.get(pk=pk)
+    except Socialization.DoesNotExist:
+        return Response(status=404)
+
+    if request.method == 'GET':
+        serializer = SocializationSerializer(item)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = SocializationSerializer(item, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

@@ -113,10 +113,12 @@ class Agent(SemanticModel):
 
 
 class Socialization(SemanticModel):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
     communications = models.ManyToManyField(Message,
                                             blank=True)
-    perceptions = models.ManyToManyField(Agent,
-                                         blank=True)
+    participants = models.ManyToManyField(Agent,
+                                          blank=True)
 
     semanticClass = "KIPCO__Socialization"
 

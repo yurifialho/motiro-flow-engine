@@ -38,6 +38,9 @@ urlpatterns = [
     url(r'^agent/(?P<pk>[0-9]+)/$', views.agent_detail),
     url(r'^agent/$', views.agent_list),
 
+    url(r'^socialization/(?P<pk>[0-9]+)/$', views.socialization_detail),
+    url(r'^socialization/$', views.socialization_list),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
