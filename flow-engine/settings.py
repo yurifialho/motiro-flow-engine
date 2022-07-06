@@ -160,6 +160,7 @@ SEMANTIC = {
     },
     'OWL_FILES': {
         'IMPORT_FOLDER': './owl_files/',
-        'OWL_PATH_FILE': 'file:/' + str('./owl_files/kipo_s.owl#')
+        'OWL_PATH_FILE': 'file:/' + str('./owl_files/kipo_fialho.owl#'),
+        'ONTOLOGY_IRI': 'http://www.semanticweb.org/fialho/kipo#'
     }
 }

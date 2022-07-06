@@ -1,9 +1,10 @@
+from distutils.debug import DEBUG
 import time
 import logging
 import threading
 from django.db import models
 from django.conf import settings
-from owlready2 import *
+from owlready2 import World, onto_path, sync_reasoner_pellet
 from rdflib import plugin 
 from rdflib.serializer import Serializer
 # ---
@@ -21,10 +22,13 @@ class KipoOntology:
                 tries = 0
                 while not loaded and tries < 4:
                     try:
+                        # Open 1 World - It's for test and development use
+                        # TODO: Create one World for each Process Instance
                         cls._world = World(filename=settings.SEMANTIC["DATABASE"]["NAME"], exclusive=False)
                         onto_path.append(settings.SEMANTIC["OWL_FILES"]["IMPORT_FOLDER"])
-                        cls._kipo = cls._world.get_ontology(settings.SEMANTIC["OWL_FILES"]["OWL_PATH_FILE"]).load()
-                        #sync_reasoner_pellet(x = cls._world, infer_property_values=True)
+                        cls._world.get_ontology(settings.SEMANTIC["OWL_FILES"]["OWL_PATH_FILE"]).load()
+                        cls._kipo = cls._world.get_ontology(settings.SEMANTIC["OWL_FILES"]["ONTOLOGY_IRI"]).load()
+                        cls.sync()
                         cls._world.save()
                         loaded = cls._kipo.loaded
                     except Exception as e:
@@ -49,6 +53,7 @@ class KipoOntology:
     @classmethod
     def save(cls):
         world = cls.getWorld()
+        cls.sync(world)
         world.save()
 
     @classmethod
@@ -58,6 +63,15 @@ class KipoOntology:
             return list(l)
         except Exception:
             return None
+    
+    @classmethod
+    def sync(cls, world : World = None) -> None :
+        if not world:
+            world = cls._world
+        if not world:
+            raise Exception('World is None. You need have a initialized world')            
+        debug = 2 if settings.DEBUG else 1 
+        sync_reasoner_pellet(x = world, infer_property_values=True, debug = debug)
 
 
 class SemanticModel(models.Model):
@@ -104,10 +118,7 @@ class SemanticModel(models.Model):
 
     def getSemanticClass(self) :
         kipo = KipoOntology.getOntology()
-        for i in list(kipo.classes()):
-            if i.name == self.semanticClass:
-                return i
-        return None
+        return kipo[self.semanticClass]
 
     def setIndividualProperties(self, owl):
         pass
