@@ -6,6 +6,8 @@ services:
       service: motiro-okara
     volumes:
       - .:/usr/src/app:cached
+    environment:
+      - DEBUG=False
 
 networks: 
   motiro-nw:

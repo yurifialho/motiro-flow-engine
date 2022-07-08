@@ -1,7 +1,7 @@
 from django.db import models
 from apps.bpmn.models import Activity as BpmnActivity, FlowElementsContainer
 from apps.semantic.models import SemanticModel
-
+from apps.semantic.models import KipoOntology
 
 class ProcessGoal(SemanticModel):
     name = models.CharField(max_length=100)
@@ -58,7 +58,13 @@ class AgentSpecialty(SemanticModel):
 
 
 class DataObject(SemanticModel):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
     data = models.TextField(max_length=1000)
+
+    @property
+    def badges(self):
+        return KipoOntology.getBadges(self.semanticClass, self.storid)
 
     semanticClass = "BPO__Data_Object"
 
@@ -175,3 +181,16 @@ class MessageFlow(SemanticModel):
 
     def __str__(self):
         return self.name
+
+class Document(SemanticModel):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, null=True)
+
+    semanticClass = "ODD__Document"
+
+    def __str__(self):
+        return self.name
+
+class Placeholder(SemanticModel):
+
+    semanticClass = "ODD__Placeholder"

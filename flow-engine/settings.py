@@ -24,7 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-t*&%q(=_fzgfws)%ur%=jb!e5z#ci47hw!iq$%(t5t$xrl&_&m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+if os.getenv('DEBUG') == "True":
+    DEBUG = True
+    os.environ['DJANGO_LOG_LEVEL'] = 'DEBUG'
 
 ALLOWED_HOSTS = ['motiro-okara', 'localhost']
 
@@ -160,7 +163,34 @@ SEMANTIC = {
     },
     'OWL_FILES': {
         'IMPORT_FOLDER': './owl_files/',
-        'OWL_PATH_FILE': 'file:/' + str('./owl_files/kipo_fialho.owl#'),
+        'OWL_PATH_FILE': 'file:/' + str('./owl_files/kipo.owl#'),
         'ONTOLOGY_IRI': 'http://www.semanticweb.org/fialho/kipo#'
     }
+}
+
+# Logger Configuration
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {
+            'format': '[MOTIRO-OKARA] %(levelname)s %(asctime)s %(module)s '
+                      '%(name)s.%(funcName)s:%(lineno)s: %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'default',
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        }
+    },
 }

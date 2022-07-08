@@ -24,6 +24,7 @@ class KipoOntology:
                     try:
                         # Open 1 World - It's for test and development use
                         # TODO: Create one World for each Process Instance
+                        logger.info("Loading ontologies....")
                         cls._world = World(filename=settings.SEMANTIC["DATABASE"]["NAME"], exclusive=False)
                         onto_path.append(settings.SEMANTIC["OWL_FILES"]["IMPORT_FOLDER"])
                         cls._world.get_ontology(settings.SEMANTIC["OWL_FILES"]["OWL_PATH_FILE"]).load()
@@ -31,6 +32,7 @@ class KipoOntology:
                         cls.sync()
                         cls._world.save()
                         loaded = cls._kipo.loaded
+                        logger.info("Ontologies loaded.")
                     except Exception as e:
                         tries += 1
                         logger.info(settings.SEMANTIC["OWL_FILES"]["OWL_PATH_FILE"])
@@ -66,12 +68,47 @@ class KipoOntology:
     
     @classmethod
     def sync(cls, world : World = None) -> None :
+        logger.info("Sync world with reasoner.....")
         if not world:
             world = cls._world
         if not world:
             raise Exception('World is None. You need have a initialized world')            
         debug = 2 if settings.DEBUG else 1 
         sync_reasoner_pellet(x = world, infer_property_values=True, debug = debug)
+        logger.info("Sync finished.")
+    
+    @classmethod
+    def getBadges(cls, semanticClass : str, storid : int ) -> list:
+        kipo = cls.getOntology()
+
+        badges = []
+        with kipo:
+            docs = kipo[semanticClass].instances()
+            for doc in docs:
+                logger.debug(doc)
+                logger.debug(f"Selected[{doc.storid}]-[{storid}]")
+                if doc.storid == storid:
+                    for badge in doc.is_a:
+                        logger.debug(f"Badge for {doc.name} is {badge.name}")
+                        badges.append(badge.name)
+        
+        return badges
+    
+    @classmethod
+    def addEqualsTo(cls, semanticClass : str, toClass : str, storid : int) -> bool:
+        kipo = cls.getOntology()
+        with kipo:
+            docs = kipo[semanticClass].instances()
+            for doc in docs:
+                logger.debug(doc)
+                logger.debug(f"Selected[{doc.storid}]-[{storid}]")
+                if doc.storid == storid:
+                    doc.is_a.append(kipo[toClass])
+                    cls.save()
+                    return True
+        
+        return False
+
 
 
 class SemanticModel(models.Model):

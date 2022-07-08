@@ -1,0 +1,1664 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://www.semanticweb.org/fialho/kipo"
+         xmlns="http://www.semanticweb.org/fialho/kipo#">
+
+<owl:Ontology rdf:about="file:/./owl_files/kipo_fialho.owl"/>
+
+<owl:Ontology rdf:about="http://www.semanticweb.org/fialho/kipo"/>
+
+<owl:ObjectProperty rdf:about="#DIR"/>
+
+<owl:ObjectProperty rdf:about="#INV">
+  <owl:inverseOf rdf:resource="#INV"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_according_to">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#according_to"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_associated_with">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#associated_with"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_becomes">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#becomes"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_belongs_to">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#belongs_to"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_can_solve">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#can_solve"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_caused_by">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#caused_by"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_composed_by">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#composed_by"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_composes">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#composes"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_connects">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#connects"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_considers">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#considers"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_consist_of">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#consist_of"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_contains">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#contains"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_contributes_to_create">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#contributes_to_create"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_creates">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#creates"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_delivers">
+  <rdfs:subPropertyOf rdf:resource="#INV_output"/>
+  <owl:inverseOf rdf:resource="#delivers"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_demanded_by">
+  <rdfs:subPropertyOf rdf:resource="#INV_input"/>
+  <owl:inverseOf rdf:resource="#demanded_by"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_determines">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#determines"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_generates">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#generates"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_get">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#get"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_has">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#has"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_has_a">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#has_a"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_help_to_innovate">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#help_to_innovate"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_identifies">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#identifies"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_influences">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#influences"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_innovation_contribution">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#innovation_contribution"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_input">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#input"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_instance_of">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#instance_of"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_involves">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#involves"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_is_a">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#is_a"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_is_caused_by">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#is_caused_by"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_is_connected_with">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#is_connected_with"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_is_discussed_in">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#is_discussed_in"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_is_motivated_by">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#is_motivated_by"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_may_be_helped_by">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#may_be_helped_by"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_motivates">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#motivates"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_occurs">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#occurs"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_output">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#output"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_participates">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#participates"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_performs">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#performs"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_precedes">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#precedes"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_produces">
+  <rdfs:subPropertyOf rdf:resource="#INV_output"/>
+  <owl:inverseOf rdf:resource="#produces"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_proposes">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#proposes"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_propositional_content_of">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#propositional_content_of"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_provides">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#provides"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_required_by">
+  <rdfs:subPropertyOf rdf:resource="#INV_input"/>
+  <owl:inverseOf rdf:resource="#required_by"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_resulting_event_expr">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#resulting_event_expr"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_set_goal">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#INV_set_goal"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_stimulates">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#stimulates"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_threatens">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#threatens"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_triggering_event_expr">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#triggering_event_expr"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_undertakes_to_carry_out">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#undertakes_to_carry_out"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#INV_uses">
+  <rdfs:subPropertyOf rdf:resource="#INV"/>
+  <owl:inverseOf rdf:resource="#uses"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#according_to">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#DO__Advantage"/>
+        <rdf:Description rdf:about="#DO__Disadvantage"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range rdf:resource="#DO__Criterion"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#associated_with">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#BPO__Flow"/>
+        <rdf:Description rdf:about="#DO__Alternative"/>
+        <rdf:Description rdf:about="#DO__Question"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#BPO__Association"/>
+        <rdf:Description rdf:about="#KIPCO__Belief"/>
+        <rdf:Description rdf:about="#KIPCO__Desire"/>
+        <rdf:Description rdf:about="#KIPCO__Experience"/>
+        <rdf:Description rdf:about="#KIPCO__Specialty"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#becomes">
+  <rdfs:domain rdf:resource="#KIPCO__Belief"/>
+  <rdfs:range rdf:resource="#KIPCO__Intention"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#belongs_to">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#DO__Feeling"/>
+        <rdf:Description rdf:about="#KIPCO__Experience"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range rdf:resource="#KIPCO__Agent"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#can_solve">
+  <rdfs:domain rdf:resource="#DO__Decision"/>
+  <rdfs:range rdf:resource="#DO__Question"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#caused_by">
+  <rdfs:domain rdf:resource="#CO__COM__Perception"/>
+  <rdfs:range rdf:resource="#KIPCO__Communication"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#composed_by">
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#composes">
+  <rdfs:domain rdf:resource="#DO__Chosen_Alternative"/>
+  <rdfs:range rdf:resource="#DO__Decision"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#connects">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#BPO__Association"/>
+        <rdf:Description rdf:about="#BPO__Message_Flow"/>
+        <rdf:Description rdf:about="#KIPCO__Message_Flow"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#BPO__Activity"/>
+        <rdf:Description rdf:about="#KIPCO__Informal_Exchange"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#considers">
+  <rdfs:domain rdf:resource="#DO__Decision"/>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#DO__Alternative"/>
+        <rdf:Description rdf:about="#DO__Restriction"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#consist_of">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#KIPCO__Message_Flow"/>
+        <rdf:Description rdf:about="#ODD__Data_Object"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#CO__COM__Message"/>
+        <rdf:Description rdf:about="#ODD__Attribute"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#contains">
+  <rdfs:domain rdf:resource="#ODD__Process"/>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Data_Object"/>
+        <rdf:Description rdf:about="#ODD__Document"/>
+        <rdf:Description rdf:about="#ODD__Task"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#contributes_to_create">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#BPO__Data_Object"/>
+        <rdf:Description rdf:about="#KIPCO__Mental_Image"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range rdf:resource="#KIPCO__Assertion"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#creates">
+  <rdfs:domain rdf:resource="#KIPCO__Socialization"/>
+  <rdfs:range rdf:resource="#KIPCO__Mental_Image"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#delivers">
+  <rdfs:domain rdf:resource="#ODD__Task"/>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Attribute"/>
+        <rdf:Description rdf:about="#ODD__Data_Object"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#output"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#demanded_by">
+  <rdfs:domain rdf:resource="#ODD__Document"/>
+  <rdfs:range rdf:resource="#ODD__Task"/>
+  <rdfs:subPropertyOf rdf:resource="#input"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#determines">
+  <rdfs:domain rdf:resource="#DO__Question"/>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#KIPCO__Experience"/>
+        <rdf:Description rdf:about="#KIPCO__Specialty"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#generates">
+  <rdfs:domain rdf:resource="#DO__Fact"/>
+  <rdfs:range rdf:resource="#DO__Evidence"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#get">
+  <rdfs:domain rdf:resource="#DO__Alternative"/>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#DO__Advantage"/>
+        <rdf:Description rdf:about="#DO__Disadvantage"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#DO__Alternative"/>
+        <rdf:Description rdf:about="#KIPCO__Innovation_Agent"/>
+        <rdf:Description rdf:about="#KIPCO__Knowledge_Intensive_Process"/>
+        <rdf:Description rdf:about="#KIPCO__Knowledge_Intesive_Activity"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#DO__Risk"/>
+        <rdf:Description rdf:about="#KIPCO__Activity_Goal"/>
+        <rdf:Description rdf:about="#KIPCO__Process_Goal"/>
+        <rdf:Description rdf:about="#KIPCO__Specialty"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#has_a">
+  <rdfs:domain rdf:resource="#ODD__Data_Object"/>
+  <rdfs:range rdf:resource="#ODD__Data_Object"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#help_to_innovate">
+  <rdfs:domain rdf:resource="#KIPCO__Innovation_Agent"/>
+  <rdfs:range rdf:resource="#KIPCO__Innovation"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#identifies">
+  <rdfs:domain rdf:resource="#KIPCO__Impact_Agent"/>
+  <rdfs:range rdf:resource="#DO__Question"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#influences">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#DO__Fact"/>
+        <rdf:Description rdf:about="#DO__Feeling"/>
+        <rdf:Description rdf:about="#KIPCO__Contigency"/>
+        <rdf:Description rdf:about="#KIPCO__Specialty"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#DO__Alternative"/>
+        <rdf:Description rdf:about="#DO__Decision"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#innovation_contribution">
+  <rdfs:domain rdf:resource="#KIPCO__Innovation_Agent"/>
+  <rdfs:range rdf:resource="#KIPCO__Knowledge_Intesive_Activity"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+  <owl:propertyChainAxiom>
+    <rdf:Description>
+      <rdf:first rdf:resource="#help_to_innovate"/>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first rdf:resource="#INV_may_be_helped_by"/>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </owl:propertyChainAxiom>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#input">
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#instance_of">
+  <rdfs:domain rdf:resource="#DO_Fact"/>
+  <rdfs:range rdf:resource="#KIPCO__Integrity_Rule"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#involves">
+  <rdfs:domain rdf:resource="#KIPCO__Knowledge_Intesive_Activity"/>
+  <rdfs:range rdf:resource="#DO__Decision"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_a">
+  <rdfs:domain rdf:resource="#ODD__Task"/>
+  <rdfs:range rdf:resource="#ODD__Task"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_caused_by">
+  <rdfs:domain rdf:resource="#DO__Question"/>
+  <rdfs:range rdf:resource="#DO__Evidence"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_connected_with">
+  <rdfs:domain rdf:resource="#BPO__Data_Object"/>
+  <rdfs:range rdf:resource="#BPO__Association"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_discussed_in">
+  <rdfs:domain rdf:resource="#DO__Alternative"/>
+  <rdfs:range rdf:resource="#KIPCO__Socialization"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#is_motivated_by">
+  <rdfs:domain rdf:resource="#DO__Feeling"/>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#DO__Evidence"/>
+        <rdf:Description rdf:about="#KIPCO__Belief"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#may_be_helped_by">
+  <rdfs:domain rdf:resource="#KIPCO__Knowledge_Intesive_Activity"/>
+  <rdfs:range rdf:resource="#KIPCO__Innovation"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#motivates">
+  <rdfs:domain rdf:resource="#KIPCO__Desire"/>
+  <rdfs:range rdf:resource="#KIPCO__Agent"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#occurs">
+  <rdfs:domain rdf:resource="#KIPCO__Informal_Exchange"/>
+  <rdfs:range rdf:resource="#KIPCO__Socialization"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#output">
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#participates">
+  <rdfs:domain rdf:resource="#KIPCO__External_Agent"/>
+  <rdfs:range rdf:resource="#KIPCO__Socialization"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#performs">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#CO__COM__Receiver"/>
+        <rdf:Description rdf:about="#CO__COM__Sender"/>
+        <rdf:Description rdf:about="#KIPCO__Agent"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#CO__COM__Communicative_Interaction"/>
+        <rdf:Description rdf:about="#CO__COM__Perception"/>
+        <rdf:Description rdf:about="#DO__Decision"/>
+        <rdf:Description rdf:about="#KIPCO__Communication"/>
+        <rdf:Description rdf:about="#KIPCO__Knowledge_Intesive_Activity"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#precedes">
+  <rdfs:domain rdf:resource="#ODD__Task"/>
+  <rdfs:range rdf:resource="#ODD__Task"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#produces">
+  <rdfs:domain rdf:resource="#ODD__Task"/>
+  <rdfs:range rdf:resource="#ODD__Document"/>
+  <rdfs:subPropertyOf rdf:resource="#output"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#proposes">
+  <rdfs:domain rdf:resource="#KIPCO__Innovation_Agent"/>
+  <rdfs:range rdf:resource="#DO__Alternative"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#propositional_content_of">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#CO__COM__Perception"/>
+        <rdf:Description rdf:about="#KIPCO__Communication"/>
+        <rdf:Description rdf:about="#KIPCO__Intention"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#CO__COM__Message"/>
+        <rdf:Description rdf:about="#KIPCO__Activity_Goal"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#provides">
+  <rdfs:domain rdf:resource="#ODD__Document"/>
+  <rdfs:range>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Attribute"/>
+        <rdf:Description rdf:about="#ODD__Data_Object"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:range>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#required_by">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Attribute"/>
+        <rdf:Description rdf:about="#ODD__Data_Object"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:subPropertyOf rdf:resource="#input"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#resulting_event_expr">
+  <rdfs:domain rdf:resource="#BRO__Reaction_Foundational_Rule"/>
+  <rdfs:range rdf:resource="#BRO__Foundational_Event"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#set_goal">
+  <rdfs:domain rdf:resource="#ODD__Logic_Task"/>
+  <rdfs:range rdf:resource="#ODD__Task"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#stimulates">
+  <rdfs:domain>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#KIPCO__Informal_Exchange"/>
+        <rdf:Description rdf:about="#KIPCO__Socialization"/>
+      </owl:unionOf>
+    </owl:Class>
+  </rdfs:domain>
+  <rdfs:range rdf:resource="#KIPCO__Contigency"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#threatens">
+  <rdfs:domain rdf:resource="#DO__Risk"/>
+  <rdfs:range rdf:resource="#DO__Decision"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#triggering_event_expr">
+  <rdfs:domain rdf:resource="#BRO__Reaction_Foundational_Rule"/>
+  <rdfs:range rdf:resource="#BRO__Foundational_Event"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#undertakes_to_carry_out">
+  <rdfs:domain rdf:resource="#KIPCO__Agent"/>
+  <rdfs:range rdf:resource="#KIPCO__Intention"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#uses">
+  <rdfs:domain rdf:resource="#DO__Alternative"/>
+  <rdfs:range rdf:resource="#DO__Resource"/>
+  <rdfs:subPropertyOf rdf:resource="#DIR"/>
+</owl:ObjectProperty>
+
+<owl:Class rdf:about="#BPO"/>
+
+<owl:Class rdf:about="#BPO__Activity">
+  <rdfs:subClassOf rdf:resource="#BPO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BPO__Association">
+  <rdfs:subClassOf rdf:resource="#BPO"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#INV_associated_with"/>
+          <owl:onClass rdf:resource="#BPO__Flow"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#INV_is_connected_with"/>
+          <owl:onClass rdf:resource="#BPO__Data_Object"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#connects"/>
+          <owl:onClass rdf:resource="#BPO__Activity"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#BPO__Data_Object">
+  <rdfs:subClassOf rdf:resource="#BPO"/>
+  <rdfs:subClassOf rdf:resource="#DO__Resource"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Knowledge_Structure"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#is_connected_with"/>
+      <owl:onClass rdf:resource="#BPO__Association"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#BPO__Flow">
+  <rdfs:subClassOf rdf:resource="#BPO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#associated_with"/>
+      <owl:onClass rdf:resource="#BPO__Association"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#BPO__Message_Flow">
+  <rdfs:subClassOf rdf:resource="#BPO__Flow"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#connects"/>
+      <owl:onClass rdf:resource="#BPO__Activity"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#BRO"/>
+
+<owl:Class rdf:about="#BRO__Derivation_Foundational_Rule">
+  <rdfs:subClassOf rdf:resource="#BRO"/>
+  <rdfs:subClassOf rdf:resource="#BRO__Fundational_Business_Rule"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#composed_by"/>
+      <owl:someValuesFrom rdf:resource="#BRO__Foundational_Conclusion"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#BRO__Foundational_Conclusion">
+  <rdfs:subClassOf rdf:resource="#BRO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BRO__Foundational_Condition">
+  <rdfs:subClassOf rdf:resource="#BRO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BRO__Foundational_Event">
+  <rdfs:subClassOf rdf:resource="#BRO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BRO__Foundational_Integrity_Rule">
+  <rdfs:subClassOf rdf:resource="#BRO"/>
+  <rdfs:subClassOf rdf:resource="#BRO__Fundational_Business_Rule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BRO__Foundational_Post_Condition">
+  <rdfs:subClassOf rdf:resource="#BRO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BRO__Fundational_Business_Rule">
+  <rdfs:subClassOf rdf:resource="#BRO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#composed_by"/>
+      <owl:someValuesFrom rdf:resource="#BRO__Foundational_Condition"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#BRO__Reaction_Foundational_Rule">
+  <rdfs:subClassOf rdf:resource="#BRO"/>
+  <rdfs:subClassOf rdf:resource="#BRO__Fundational_Business_Rule"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#composed_by"/>
+          <owl:someValuesFrom rdf:resource="#BRO__Foundational_Post_Condition"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#resulting_event_expr"/>
+          <owl:onClass rdf:resource="#BRO__Foundational_Event"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#triggering_event_expr"/>
+          <owl:onClass rdf:resource="#BRO__Foundational_Event"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#CO"/>
+
+<owl:Class rdf:about="#COM">
+  <rdfs:subClassOf rdf:resource="#CO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CO__COM__Communicative_Interaction">
+  <rdfs:subClassOf rdf:resource="#COM"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#composed_by"/>
+          <owl:onClass rdf:resource="#CO__COM__Perception"/>
+          <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#composed_by"/>
+          <owl:onClass rdf:resource="#KIPCO__Communication"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:qualifiedCardinality>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#CO__COM__Message">
+  <rdfs:subClassOf rdf:resource="#COM"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CO__COM__Perception">
+  <rdfs:subClassOf rdf:resource="#COM"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#caused_by"/>
+          <owl:onClass rdf:resource="#KIPCO__Communication"/>
+          <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#propositional_content_of"/>
+          <owl:onClass rdf:resource="#CO__COM__Message"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#CO__COM__Receiver">
+  <rdfs:subClassOf rdf:resource="#COM"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Agent"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#KIPCO__Agent"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#performs"/>
+          <owl:someValuesFrom rdf:resource="#CO__COM__Perception"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#CO__COM__Sender">
+  <rdfs:subClassOf rdf:resource="#COM"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Agent"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#KIPCO__Agent"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#performs"/>
+          <owl:someValuesFrom rdf:resource="#KIPCO__Communication"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#CO__COOP__Collaborative_Session">
+  <rdfs:subClassOf rdf:resource="#CO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO"/>
+
+<owl:Class rdf:about="#DO_Fact">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Advantage">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+  <owl:disjointWith rdf:resource="#DO__Disadvantage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Alternative">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#uses"/>
+      <owl:onClass rdf:resource="#DO__Resource"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Chosen_Alternative">
+  <rdfs:subClassOf rdf:resource="#DO__Alternative"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#composes"/>
+      <owl:onClass rdf:resource="#DO__Decision"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:disjointWith rdf:resource="#DO__Discarded_Alternative"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Criterion">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Business_Rule"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#INV_according_to"/>
+      <owl:onClass>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#DO__Advantage"/>
+            <rdf:Description rdf:about="#DO__Disadvantage"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:onClass>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Decision">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#can_solve"/>
+      <owl:onClass rdf:resource="#DO__Question"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#considers"/>
+      <owl:onClass rdf:resource="#DO__Alternative"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Disadvantage">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Discarded_Alternative">
+  <rdfs:subClassOf rdf:resource="#DO__Alternative"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Evidence">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Fact">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Feeling">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#belongs_to"/>
+      <owl:onClass rdf:resource="#KIPCO__Agent"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Question">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Contigency"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#determines"/>
+      <owl:onClass rdf:resource="#KIPCO__Specialty"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#is_caused_by"/>
+      <owl:onClass rdf:resource="#DO__Evidence"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Resource">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Restriction">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Business_Rule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DO__Risk">
+  <rdfs:subClassOf rdf:resource="#DO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO"/>
+
+<owl:Class rdf:about="#KIPCO__Activity_Goal">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Agent">
+  <rdfs:subClassOf rdf:resource="#DO__Resource"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:disjointWith rdf:resource="#KIPCO__Knowledge_Intesive_Activity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Assertion">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Knowledge_Structure"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Belief">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#belongs_to"/>
+      <owl:onClass rdf:resource="#KIPCO__Agent"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#influences"/>
+      <owl:onClass rdf:resource="#DO__Decision"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Business_Rule">
+  <rdfs:subClassOf rdf:resource="#BRO__Fundational_Business_Rule"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Assertion"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Communication">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#propositional_content_of"/>
+      <owl:onClass rdf:resource="#CO__COM__Message"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Contigency">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#influences"/>
+      <owl:someValuesFrom rdf:resource="#DO__Alternative"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Derivation_Rule">
+  <rdfs:subClassOf rdf:resource="#BRO__Derivation_Foundational_Rule"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Business_Rule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Desire">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#motivates"/>
+      <owl:onClass rdf:resource="#KIPCO__Agent"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Experience">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#belongs_to"/>
+      <owl:onClass rdf:resource="#KIPCO__Agent"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__External_Agent">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Agent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Impact_Agent">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Agent"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#identifies"/>
+      <owl:onClass rdf:resource="#DO__Question"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Informal_Exchange">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Innovation">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Innovation_Agent">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Agent"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has"/>
+      <owl:onClass rdf:resource="#KIPCO__Specialty"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#proposes"/>
+      <owl:onClass rdf:resource="#DO__Alternative"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <rdfs:comment>INV_innovation_contribution min 1 KIPCO__Knowledge_Intesive_Activity</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Integrity_Rule">
+  <rdfs:subClassOf rdf:resource="#BRO__Foundational_Integrity_Rule"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Business_Rule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Intention">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Desire"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#propositional_content_of"/>
+      <owl:onClass rdf:resource="#KIPCO__Activity_Goal"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Knowledge_Intensive_Process">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#composed_by"/>
+      <owl:onClass rdf:resource="#KIPCO__Knowledge_Intesive_Activity"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has"/>
+      <owl:onClass rdf:resource="#KIPCO__Process_Goal"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Knowledge_Intesive_Activity">
+  <rdfs:subClassOf rdf:resource="#BPO__Activity"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#has"/>
+      <owl:someValuesFrom rdf:resource="#KIPCO__Activity_Goal"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#involves"/>
+      <owl:someValuesFrom rdf:resource="#DO__Decision"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#may_be_helped_by"/>
+      <owl:someValuesFrom rdf:resource="#KIPCO__Innovation"/>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Knowledge_Structure">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Mental_Image">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Knowledge_Structure"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Message_Flow">
+  <rdfs:subClassOf rdf:resource="#BPO__Message_Flow"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#consist_of"/>
+          <owl:onClass rdf:resource="#CO__COM__Message"/>
+          <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#connects"/>
+          <owl:onClass rdf:resource="#KIPCO__Informal_Exchange"/>
+          <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Process_Goal">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Reaction_Rule">
+  <rdfs:subClassOf rdf:resource="#BRO__Reaction_Foundational_Rule"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO__Business_Rule"/>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Socialization">
+  <rdfs:subClassOf rdf:resource="#CO__COM__Communicative_Interaction"/>
+  <rdfs:subClassOf rdf:resource="#CO__COOP__Collaborative_Session"/>
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+  <owl:equivalentClass>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#creates"/>
+      <owl:onClass rdf:resource="#KIPCO__Mental_Image"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#KIPCO__Specialty">
+  <rdfs:subClassOf rdf:resource="#KIPCO"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD"/>
+
+<owl:Class rdf:about="#ODD__Attribute">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Data">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Attribute"/>
+        <rdf:Description rdf:about="#ODD__Data_Object"/>
+        <rdf:Description rdf:about="#ODD__Document"/>
+      </owl:unionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Data_Object">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+  <owl:equivalentClass rdf:resource="#BPO__Data_Object"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Document">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Executable">
+  <rdfs:subClassOf rdf:resource="#ODD__Execution_State"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Execution_State">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Goal_Relevant">
+  <rdfs:subClassOf rdf:resource="#ODD__Relevance_State"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Placeholder"/>
+        <rdf:Description rdf:about="#ODD__Process_Goal"/>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Placeholder"/>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#delivers"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Goal_Relevant"/>
+            </owl:Restriction>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#demanded_by"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Goal_Relevant"/>
+            </owl:Restriction>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#precedes"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Goal_Relevant"/>
+            </owl:Restriction>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#produces"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Goal_Relevant"/>
+            </owl:Restriction>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#provides"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Goal_Relevant"/>
+            </owl:Restriction>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#required_by"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Goal_Relevant"/>
+            </owl:Restriction>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Irrelevant">
+  <rdfs:subClassOf rdf:resource="#ODD__Relevance_State"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Logic_Task">
+  <rdfs:subClassOf rdf:resource="#ODD__System_Task"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Placeholder">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Process">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+  <owl:equivalentClass rdf:resource="#KIPCO__Knowledge_Intensive_Process"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Process_Goal">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+  <owl:equivalentClass rdf:resource="#KIPCO__Process_Goal"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Relevance_State">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Relevant">
+  <rdfs:subClassOf rdf:resource="#ODD__Relevance_State"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Unexecuted"/>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#output"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Unavailable"/>
+            </owl:Restriction>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#precedes"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Unexecuted"/>
+            </owl:Restriction>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__System_Task">
+  <rdfs:subClassOf rdf:resource="#ODD__Task"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Task">
+  <rdfs:subClassOf rdf:resource="#ODD"/>
+  <owl:equivalentClass rdf:resource="#KIPCO__Knowledge_Intesive_Activity"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Unavailable">
+  <rdfs:subClassOf rdf:resource="#ODD__Data"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Data"/>
+        <rdf:Description rdf:about="#ODD__Placeholder"/>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Unexecutable">
+  <rdfs:subClassOf rdf:resource="#ODD__Execution_State"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Unexecuted"/>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#INV_input"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Unavailable"/>
+            </owl:Restriction>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#INV_precedes"/>
+              <owl:someValuesFrom rdf:resource="#ODD__Unexecuted"/>
+            </owl:Restriction>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__Unexecuted">
+  <rdfs:subClassOf rdf:resource="#ODD__Execution_State"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#ODD__Placeholder"/>
+        <rdf:Description rdf:about="#ODD__Task"/>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+</owl:Class>
+
+<owl:Class rdf:about="#ODD__User_Task">
+  <rdfs:subClassOf rdf:resource="#ODD__Task"/>
+</owl:Class>
+
+<ODD__Data_Object rdf:about="#DO1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <required_by rdf:resource="#T5"/>
+</ODD__Data_Object>
+
+<ODD__Data_Object rdf:about="#DO2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#ODD__Placeholder"/>
+  <required_by rdf:resource="#T3"/>
+</ODD__Data_Object>
+
+<ODD__Data_Object rdf:about="#DO3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#ODD__Placeholder"/>
+  <required_by rdf:resource="#T6"/>
+</ODD__Data_Object>
+
+<ODD__Document rdf:about="#Doc1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#ODD__Placeholder"/>
+  <demanded_by rdf:resource="#T1"/>
+</ODD__Document>
+
+<KIPCO__Knowledge_Intesive_Activity rdf:about="#T1">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#ODD__Placeholder"/>
+  <precedes rdf:resource="#T2"/>
+</KIPCO__Knowledge_Intesive_Activity>
+
+<KIPCO__Knowledge_Intesive_Activity rdf:about="#T2">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#ODD__Placeholder"/>
+  <delivers rdf:resource="#DO2"/>
+</KIPCO__Knowledge_Intesive_Activity>
+
+<KIPCO__Knowledge_Intesive_Activity rdf:about="#T3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#ODD__Placeholder"/>
+  <rdf:type rdf:resource="#ODD__Process_Goal"/>
+</KIPCO__Knowledge_Intesive_Activity>
+
+<KIPCO__Knowledge_Intesive_Activity rdf:about="#T4">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#ODD__Placeholder"/>
+  <delivers rdf:resource="#DO1"/>
+</KIPCO__Knowledge_Intesive_Activity>
+
+<KIPCO__Knowledge_Intesive_Activity rdf:about="#T5">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#ODD__Placeholder"/>
+  <delivers rdf:resource="#DO2"/>
+  <delivers rdf:resource="#DO3"/>
+</KIPCO__Knowledge_Intesive_Activity>
+
+<KIPCO__Knowledge_Intesive_Activity rdf:about="#T6">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</KIPCO__Knowledge_Intesive_Activity>
+
+<ODD__Document rdf:about="#Documento 03">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</ODD__Document>
+
+<ODD__Document rdf:about="#Documento 006">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#ODD__Placeholder"/>
+</ODD__Document>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#ODD__Attribute"/>
+    <rdf:Description rdf:about="#ODD__Data_Object"/>
+    <rdf:Description rdf:about="#ODD__Document"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+
+</rdf:RDF>

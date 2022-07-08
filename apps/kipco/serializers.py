@@ -9,6 +9,7 @@ from apps.kipco.models import AgentType
 from apps.kipco.models import AgentSpecialty
 from apps.kipco.models import Agent
 from apps.kipco.models import Socialization
+from apps.kipco.models import DataObject
 
 
 class IntensiveProcessSerializer(ModelSerializer):
@@ -79,3 +80,9 @@ class SocializationSerializer(ModelSerializer):
     class Meta:
         model = Socialization
         fields = '__all__'
+
+class DataObjectSerializer(ModelSerializer):
+
+    class Meta:
+        model = DataObject
+        fields = ('name', 'description', 'data', 'badges', 'storid')

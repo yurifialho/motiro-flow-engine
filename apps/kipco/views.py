@@ -1,3 +1,4 @@
+import logging
 from rest_framework.decorators import api_view
 from rest_framework.decorators import authentication_classes
 from rest_framework.decorators import permission_classes
@@ -14,6 +15,9 @@ from apps.kipco.models import Socialization
 from apps.kipco.models import Intention
 from apps.kipco.models import Agent
 from apps.kipco.models import Desire
+from apps.kipco.models import Document
+from apps.kipco.models import Placeholder
+from apps.kipco.models import DataObject
 from apps.kipco.serializers import ProcessGoalSerializer
 from apps.kipco.serializers import ActivityGoalSerializer
 from apps.kipco.serializers import IntensiveProcessSerializer
@@ -24,7 +28,10 @@ from apps.kipco.serializers import IntentionSerializer
 from apps.kipco.serializers import AgentSerializer
 from apps.kipco.serializers import DesireSerializer
 from apps.kipco.serializers import SocializationSerializer
+from apps.kipco.serializers import DataObjectSerializer
+from apps.semantic.models import KipoOntology
 
+logger = logging.getLogger(__name__)
 
 @api_view(['GET', 'POST'])
 @authentication_classes([TokenAuthentication])
@@ -441,6 +448,105 @@ def socialization_detail(request, pk):
 
     elif request.method == 'PUT':
         serializer = SocializationSerializer(item, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        item.delete()
+        return Response(status=204)
+
+@api_view(['GET', 'POST'])
+def document_list(request):
+    if request.method == 'GET':
+        kipo = KipoOntology.getOntology()
+        ret_docs = []
+        with kipo:
+            docs = kipo[Document.semanticClass].instances()
+            for doc in docs:
+                badges = []
+                for badge in doc.is_a:
+                    badges.append(badge.name)
+                ret_docs.append({'id':doc.storid, 'name':doc.name, 'badges': badges})
+
+        return Response(ret_docs)
+
+    elif request.method == 'POST':
+        kipo = KipoOntology.getOntology()
+        with kipo:
+            doc = kipo[Document.semanticClass](request.data['name'])
+            doc.is_a.append(kipo[Placeholder.semanticClass])
+            KipoOntology.save()
+            return Response({'id':doc.storid, 'name':doc.name})
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def document_detail(request, pk):
+    #try:
+    #    item = Socialization.objects.get(pk=pk)
+    #except Socialization.DoesNotExist:
+    #    return Response(status=404)
+
+    if request.method == 'GET':
+        return Response({}, status=503)
+
+    elif request.method == 'PUT':
+        return Response({}, status=504)
+
+    elif request.method == 'DELETE':
+        return Response({}, status=505)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def document_badges(request, pk):
+
+    kipo = KipoOntology.getOntology()
+
+    badges = []
+    with kipo:
+        docs = kipo[Document.semanticClass].instances()
+        for doc in docs:
+            logger.info(doc)
+            logger.info(f"Selected[{doc.storid}]-[{pk}]")
+            if doc.storid == int(pk):
+                for badge in doc.is_a:
+                    logger.info(f"Badge for {doc.name} is {badge.name}")
+                    badges.append(badge.name)
+                
+    return Response(badges)
+
+@api_view(['GET', 'POST'])
+def data_object_list(request):
+    if request.method == 'GET':
+        items = DataObject.objects.order_by('pk')
+        serializer = DataObjectSerializer(items, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = DataObjectSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            storid = serializer.data['storid']
+            KipoOntology.addEqualsTo(DataObject.semanticClass,
+                                     Placeholder.semanticClass, 
+                                     storid)
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def data_object_detail(request, pk):
+    try:
+        item = DataObject.objects.get(pk=pk)
+    except DataObject.DoesNotExist:
+        return Response(status=404)
+
+    if request.method == 'GET':
+        serializer = DataObjectSerializer(item)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = DataObjectSerializer(item, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
