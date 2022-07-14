@@ -43,7 +43,6 @@ urlpatterns = [
 
     url(r'^document/(?P<pk>[0-9]+)/$', views.document_detail),
     url(r'^document/$', views.document_list),
-    url(r'^document/(?P<pk>[0-9]+)/badges$', views.document_badges),
 
     url(r'^data_object/(?P<pk>[0-9]+)/$', views.data_object_detail),
     url(r'^data_object/$', views.data_object_list),

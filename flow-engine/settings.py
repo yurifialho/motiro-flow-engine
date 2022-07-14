@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 import sys
 from pathlib import Path
-from owlready2 import *
+from apps.semantic.kipo_ontology import KipoOntology
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -167,6 +167,8 @@ SEMANTIC = {
         'ONTOLOGY_IRI': 'http://www.semanticweb.org/fialho/kipo#'
     }
 }
+
+
 
 # Logger Configuration
 

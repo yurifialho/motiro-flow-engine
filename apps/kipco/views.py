@@ -29,7 +29,7 @@ from apps.kipco.serializers import AgentSerializer
 from apps.kipco.serializers import DesireSerializer
 from apps.kipco.serializers import SocializationSerializer
 from apps.kipco.serializers import DataObjectSerializer
-from apps.semantic.models import KipoOntology
+from django.apps import apps
 
 logger = logging.getLogger(__name__)
 
@@ -459,26 +459,17 @@ def socialization_detail(request, pk):
 
 @api_view(['GET', 'POST'])
 def document_list(request):
-    if request.method == 'GET':
-        kipo = KipoOntology.getOntology()
-        ret_docs = []
-        with kipo:
-            docs = kipo[Document.semanticClass].instances()
-            for doc in docs:
-                badges = []
-                for badge in doc.is_a:
-                    badges.append(badge.name)
-                ret_docs.append({'id':doc.storid, 'name':doc.name, 'badges': badges})
+    kipo = apps.get_app_config('semantic').kipo_ontology.getOntology()
 
+    if request.method == 'GET':
+        ret_docs = Document.find_all_with_badges()
         return Response(ret_docs)
 
     elif request.method == 'POST':
-        kipo = KipoOntology.getOntology()
-        with kipo:
-            doc = kipo[Document.semanticClass](request.data['name'])
-            doc.is_a.append(kipo[Placeholder.semanticClass])
-            KipoOntology.save()
-            return Response({'id':doc.storid, 'name':doc.name})
+        doc = Document(request.data['name'])
+        doc.add_equals_to(Placeholder)
+        doc.save()
+        return Response(doc.to_map())
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -497,24 +488,6 @@ def document_detail(request, pk):
     elif request.method == 'DELETE':
         return Response({}, status=505)
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def document_badges(request, pk):
-
-    kipo = KipoOntology.getOntology()
-
-    badges = []
-    with kipo:
-        docs = kipo[Document.semanticClass].instances()
-        for doc in docs:
-            logger.info(doc)
-            logger.info(f"Selected[{doc.storid}]-[{pk}]")
-            if doc.storid == int(pk):
-                for badge in doc.is_a:
-                    logger.info(f"Badge for {doc.name} is {badge.name}")
-                    badges.append(badge.name)
-                
-    return Response(badges)
-
 @api_view(['GET', 'POST'])
 def data_object_list(request):
     if request.method == 'GET':
@@ -526,10 +499,6 @@ def data_object_list(request):
         serializer = DataObjectSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            storid = serializer.data['storid']
-            KipoOntology.addEqualsTo(DataObject.semanticClass,
-                                     Placeholder.semanticClass, 
-                                     storid)
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
