@@ -33,8 +33,8 @@ def pre_save(sender, instance, **kwargs):
 
 @receiver(post_save)
 def post_save(sender, instance, **kwargs):
-    if SemanticModel in instance.__class__.__bases__:
-        pass
+    #if SemanticModel in instance.__class__.__bases__:
+    pass
 
 #@receiver(post_delete)
 #def post_delete(sender, instance, **kwargs):

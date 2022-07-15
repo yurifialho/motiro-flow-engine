@@ -32,21 +32,19 @@ class KipoOntology:
                     logger.info("Loading ontologies....")
                     if not os.path.exists(self.__config["DATABASE"]["NAME"]):
                         logger.info('Database not exists!')
-                        self.reload  = True
-                    
-                    self.__world = World(filename=self.__config["DATABASE"]["NAME"], exclusive=False)
-                    
-                    if self.reload:
+                        self.__world = World(filename=self.__config["DATABASE"]["NAME"], exclusive=False)
                         onto_path.append(self.__config["OWL_FILES"]["IMPORT_FOLDER"])
                         self.__world.get_ontology(self.__config["OWL_FILES"]["OWL_PATH_FILE"]).load()
-                    
-                    self.__kipo = self.__world.get_ontology(self.__config["OWL_FILES"]["ONTOLOGY_IRI"]).load()
-                    
-                    self.sync()
-                    self.save()
-                    loaded = self.__kipo.loaded
-                    self.reload = False
-                    logger.info("Ontologies loaded.")
+                        self.__kipo = self.__world.get_ontology(self.__config["OWL_FILES"]["ONTOLOGY_IRI"]).load()
+                        debug = 2 if self.debug else 1 
+                        sync_reasoner_pellet(x = self.__world, infer_property_values=True, debug = debug)
+                        self.__world.save()
+                        loaded = self.__kipo.loaded
+                        logger.info("Ontologies loaded.")
+                        self.__world.close()
+                    else:
+                        loaded = True
+                    logger.info("Semantic Database prepared.")
                 except Exception as e:
                     tries += 1
                     logger.info(self.__config["OWL_FILES"]["OWL_PATH_FILE"])
@@ -55,22 +53,26 @@ class KipoOntology:
                     time.sleep(tries*5)
         return self
 
-    def loadConfig(self):
+    def loadConfig(self, sync : bool = True):
         try:
             logger.info("Loading ontologies....")
             self.__world = World(filename=self.__config["DATABASE"]["NAME"], exclusive=False)
-            self.__kipo = self.__world.get_ontology(self.config["OWL_FILES"]["ONTOLOGY_IRI"]).load()
-            self.sync()
+            self.__kipo = self.__world.get_ontology(self.__config["OWL_FILES"]["ONTOLOGY_IRI"]).load()
+
+            if sync:
+                self.sync()
             logger.info("Ontologies loaded.")
         except Exception as e:
             logger.error(e)
 
     def getOntology(self):
+        self.loadConfig(sync=False)
         if not self.__kipo:
             raise Exception("Ontology is not loaded!")
         return self.__kipo
 
     def getWorld(self):
+        self.loadConfig(sync=False)
         if not self.__world:
             raise Exception("Ontology is not loaded!")
         return self.__world
@@ -78,6 +80,7 @@ class KipoOntology:
     def save(self, sync : bool = False):
         world = self.getWorld()
         world.save()
+        world.close()
         if sync:
             self.sync(world)
     

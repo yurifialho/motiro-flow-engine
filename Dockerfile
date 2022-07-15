@@ -10,10 +10,11 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 #RUN python manage.py shell < ./databases/loadSemanticDatabase.py
-RUN python manage.py migrate
-RUN python manage.py loaddata ./databases/fixtures/users.json
-RUN python manage.py loaddata ./databases/fixtures/criterias.json
+#RUN python manage.py migrate
+#RUN python manage.py loaddata ./databases/fixtures/users.json
+#RUN python manage.py loaddata ./databases/fixtures/criterias.json
 RUN chmod +x *.sh
 
 EXPOSE 10000
+#CMD ["python", "manage.py", "runserver", "0.0.0.0:10000", "--noreload"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:10000"]

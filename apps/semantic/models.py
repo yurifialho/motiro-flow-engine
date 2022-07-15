@@ -69,11 +69,14 @@ class NewSemanticModel:
 
     semanticClass = None
 
-    def __init__(self, name) -> None:
+    def __init__(self) -> None:
         self.onto = apps.get_app_config('semantic').kipo_ontology
         self.world = self.onto.getWorld()
         self.kipo = self.onto.getOntology()
         
+
+    def __init__(self, name) -> None:
+        self.__init__()        
         self.load_or_create(name)
 
     def get_owl_by_name(self, name : str) -> ThingClass:
@@ -90,25 +93,35 @@ class NewSemanticModel:
                 if obj.storid == storid:
                     return obj
 
-    def load_or_create(self, name : str, storid = int):
+    def load(self, name : str, storid = int):
         if not name and not storid:
             raise Exception('name not found')
         
         if name:
-            obj = self.get_owl_by_name(name)
+            owl = self.get_owl_by_name(name)
         elif storid: 
-            obj = self.get_owl_by_storid(storid)
+            owl = self.get_owl_by_storid(storid)
         
-        if not obj and name:
-            with self.kipo:
-                obj = self.kipo[self.semanticClass](name)
+        if not owl:
+            return None
+        else:
+            self.owl = owl
+            self.storid = owl.storid
+            self.name = owl.name
 
-        if not obj:
+    def load_or_create(self, name : str, storid = int):
+        owl = self.load(name, storid)
+        
+        if not owl and name:
+            with self.kipo:
+                owl = self.kipo[self.semanticClass](name)
+
+        if not owl:
             raise Exception("Object cannot be loaded or create")
         else:
-            self.owl = obj
-            self.storid = obj.storid
-            self.name = obj.name
+            self.owl = owl
+            self.storid = owl.storid
+            self.name = owl.name
 
     def save(self, sync : bool = False) :
         self.onto.save()
@@ -122,8 +135,6 @@ class NewSemanticModel:
         self.owl = None
         self.storid = None
         self.name = None
-
-
 
     def get_storid(self):
         self.storid
@@ -171,8 +182,7 @@ class NewSemanticModel:
                 objMap['badge'] = []
                 for badge in obj.is_a:
                     logger.debug(f"Badge for {obj.name} is {badge.name}")
-                    objMap['badge'].append(badge.name)
+                    if not badge.name in objMap['badge']:
+                        objMap['badge'].append(badge.name)
                 all.append(objMap)
         return all
-
-    
