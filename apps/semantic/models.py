@@ -1,10 +1,13 @@
-import time
+from __future__ import annotations
 import logging
-import threading
+import hashlib
+from datetime import date, datetime
 from django.db import models
 from django.conf import settings
 from django.apps import apps
+from apps.semantic.kipo_ontology import KipoOntology
 from owlready2 import ThingClass
+from owlready2.prop import DataPropertyClass
 
 # ---
 logger = logging.getLogger(__name__)
@@ -70,119 +73,182 @@ class NewSemanticModel:
     semanticClass = None
 
     def __init__(self) -> None:
-        self.onto = apps.get_app_config('semantic').kipo_ontology
-        self.world = self.onto.getWorld()
-        self.kipo = self.onto.getOntology()
-        
-
-    def __init__(self, name) -> None:
-        self.__init__()        
-        self.load_or_create(name)
-
-    def get_owl_by_name(self, name : str) -> ThingClass:
-        with self.kipo:
-            objs = self.kipo[self.semanticClass].instances()
-            for obj in objs:
-                if obj.name == name:
-                    return obj
-    
-    def get_owl_by_storid(self, storid : int) -> ThingClass:
-        with self.kipo:
-            objs = self.kipo[self.semanticClass].instances()
-            for obj in objs:
-                if obj.storid == storid:
-                    return obj
-
-    def load(self, name : str, storid = int):
-        if not name and not storid:
-            raise Exception('name not found')
-        
-        if name:
-            owl = self.get_owl_by_name(name)
-        elif storid: 
-            owl = self.get_owl_by_storid(storid)
-        
-        if not owl:
-            return None
-        else:
-            self.owl = owl
-            self.storid = owl.storid
-            self.name = owl.name
-
-    def load_or_create(self, name : str, storid = int):
-        owl = self.load(name, storid)
-        
-        if not owl and name:
-            with self.kipo:
-                owl = self.kipo[self.semanticClass](name)
-
-        if not owl:
-            raise Exception("Object cannot be loaded or create")
-        else:
-            self.owl = owl
-            self.storid = owl.storid
-            self.name = owl.name
+        self.owl = None
+        self.id = None
+        self.storid = None
+        self.properties = []
 
     def save(self, sync : bool = False) :
-        self.onto.save()
+        try:
+            if not self.id :
+                self.id = self.generateHashId()
 
-        if sync:
-            self.onto.sync()
+                conn = KipoOntology.getConnection()
+                kipo = conn.getOntology()
+                
+                with kipo:
+                    owl = kipo[self.semanticClass](self.id)
+                    self.storid = owl.storid
+                    self.owl = owl
+
+                    for prop in self.properties:
+                        p = conn.generateDataProperty(prop['name'], prop['value'])
+                        getattr(owl, prop['name']).append(prop['value'])
+                        logger.info(dir(owl))
+            
+                conn.save()
+
+                if sync:
+                    conn.sync()
+
+                return self
+        except Exception as e:
+            logger.error(e)
+            raise e
+        finally:
+            if conn:
+                conn.close()
+
+    def setProperties(self, name : str, value) -> None:
+        found = False
+        for prop in self.properties:
+            if prop["name"] == name:
+                prop["value"] = value
+        if not found:
+            self.properties.append({"name": name, "value": value })
+    
+    def unsetProperties(self, name : str) -> None:
+        self.setProperties(name, None)
+
     
     def delete(self, sync : bool = False):
         self.onto.delete(self.owl, sync = sync)
 
         self.owl = None
         self.storid = None
-        self.name = None
-
-    def get_storid(self):
-        self.storid
-    
-    def get_name(self) -> str:
-        return self.name
-    
-    def set_name(self, name : str):
-        self.owl.set_name(name)
-        self.name = name
+        self.id = None
 
     def to_map(self) -> map:
-        return self.owl_to_map(self.owl)
+        mObj = {'storid': self.storid, 'id': self.id}
+        if self.owl:
+            for prop in self.owl.get_properties():
+                if type(prop) == DataPropertyClass:
+                    propValue = getattr(self.owl, prop.name)
+                    if propValue:
+                        mObj[prop.name] = propValue[0]
+                    else:
+                        mObj[prop.name] = ""
 
+
+        return mObj
+
+    
     def add_equals_to(self, toClass) -> bool:
-        kipo_ontology = apps.get_app_config('semantic').kipo_ontology
-        return kipo_ontology.addEqualsTo(self.semanticClass, toClass.semanticClass, self.storid)
+        try:
+            conn = KipoOntology.getConnection()
+            ret = conn.addEqualsTo(self.semanticClass, toClass.semanticClass, self.storid)
+            conn.close()
+            return ret
+        except Exception as e:
+            logger.error(e)
+            raise(e)
+        finally:
+            conn.close()
+    
+    
+    @classmethod
+    def generateHashId(cls) -> str:
+        strId = cls.semanticClass+"__"+str(datetime.now())
+        hashObj = hashlib.sha1(strId.encode())
+        return hashObj.hexdigest()
 
     @classmethod
-    def owl_to_map(cls, owl) -> map:
-        return {'storid':owl.storid, 'name':owl.name}
+    def getInstance(cls, owl : ThingClass) -> NewSemanticModel:
+        if not owl:
+            raise ValueError("Owl object is required")
+
+        obj = NewSemanticModel()
+        obj.owl = owl
+        obj.id = owl.name
+        obj.storid = owl.storid
+        return obj
+
+    @classmethod
+    def find_by_storid(cls, storid : int):
+        try:
+            conn = KipoOntology.getConnection()
+            kipo = conn.getOntology()
+            with kipo:
+                owls = kipo[cls.semanticClass].instaces()
+                for owl in owls:
+                    if owl.storid == storid:
+                        return cls.getInstance(owl)
+            
+            return None
+
+        except Exception as e:
+            logger.error(e)
+            raise e
+        finally:
+            conn.close()
+
+    @classmethod
+    def find_by_id(cls, id : str) -> NewSemanticModel:
+        try:
+            conn = KipoOntology.getConnection()
+            kipo = conn.getOntology()
+            with kipo:
+                owls = kipo[cls.semanticClass].instances()
+                for owl in owls:
+                    if owl.name == id:
+                        return cls.getInstance(owl)
+            
+            return None
+
+        except Exception as e:
+            logger.error(e)
+            raise e
+        finally:
+            conn.close()
 
     @classmethod
     def find_all(cls) -> list:
-        kipo_ontology = apps.get_app_config('semantic').kipo_ontology
-        kipo = kipo_ontology.getOntology()
-        all = []
-        with kipo:
-            for obj in kipo[cls.semanticClass].instances():
-                all.append(cls.owl_to_map(obj))
-        return all
-    
-    @classmethod
-    def find_by_storid(cls, storid : int):
-        kipo_ontology = apps.get_app_config('semantic').kipo_ontology
+        try:
+            conn = KipoOntology.getConnection()
+            kipo = conn.getOntology()
+            all = []
+            with kipo:
+                for owl in kipo[cls.semanticClass].instances():
+                    obj = NewSemanticModel.getInstance(owl)
+                    all.append(obj.to_map())
+            return all
+        except Exception as e:
+            logger.error(e)
+            raise e
+        finally:
+            conn.close()
 
     @classmethod
     def find_all_with_badges(cls) -> list:
-        kipo_ontology = apps.get_app_config('semantic').kipo_ontology
-        kipo = kipo_ontology.getOntology()
-        all = []
-        with kipo:
-            for obj in kipo[cls.semanticClass].instances():
-                objMap = cls.owl_to_map(obj)
-                objMap['badge'] = []
-                for badge in obj.is_a:
-                    logger.debug(f"Badge for {obj.name} is {badge.name}")
-                    if not badge.name in objMap['badge']:
-                        objMap['badge'].append(badge.name)
-                all.append(objMap)
-        return all
+        try:
+            conn = KipoOntology.getConnection()
+            kipo = conn.getOntology()
+            all = []
+            with kipo:
+                for owl in kipo[cls.semanticClass].instances():
+                    obj = NewSemanticModel.getInstance(owl)
+                    objMap = obj.to_map()
+                    objMap['badge'] = []
+                    for badge in obj.owl.is_a:
+                        logger.debug(f"Badge for {obj.id} is {badge.name}")
+                        if not badge.name in objMap['badge']:
+                            objMap['badge'].append(badge.name)
+                    all.append(objMap)
+            
+            return all
+        except Exception as e:
+            logger.error(e)
+            raise e
+        finally:
+            conn.close()
+            

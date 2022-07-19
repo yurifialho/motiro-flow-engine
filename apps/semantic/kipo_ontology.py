@@ -1,13 +1,15 @@
+from __future__ import annotations
 import logging
 import threading
 import time
 import os
-import sys
+from django.apps import apps
 from owlready2 import World
 from owlready2 import ThingClass
 from owlready2 import onto_path
 from owlready2 import sync_reasoner_pellet
 from owlready2 import destroy_entity
+from owlready2 import DataProperty
 
 logger = logging.getLogger(__name__)
 
@@ -66,16 +68,31 @@ class KipoOntology:
             logger.error(e)
 
     def getOntology(self):
-        self.loadConfig(sync=False)
+        if not self.__kipo:
+            self.loadConfig(sync=False)
         if not self.__kipo:
             raise Exception("Ontology is not loaded!")
         return self.__kipo
 
     def getWorld(self):
-        self.loadConfig(sync=False)
+        if not self.__world:
+            self.loadConfig(sync=False)
         if not self.__world:
             raise Exception("Ontology is not loaded!")
         return self.__world
+
+    def close(self, world : World = None) -> bool:
+        try:
+            if not world:
+                world = self.getWorld()
+            
+            world.close()
+            self.__kipo = None
+            self.__world = None
+            return True
+        except Exception as e:
+            logger.error(e)
+            return False
 
     def save(self, sync : bool = False):
         world = self.getWorld()
@@ -138,3 +155,13 @@ class KipoOntology:
                     return True
         
         return False
+
+    def generateDataProperty(self, name : str, value) -> DataProperty:
+        propertyClass = type(name, 
+                             (DataProperty,),
+                             {"range": [str]})
+        return propertyClass
+    
+    @classmethod
+    def getConnection(cls) -> KipoOntology:
+        return apps.get_app_config('semantic').kipo_ontology

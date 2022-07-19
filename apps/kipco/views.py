@@ -459,14 +459,14 @@ def socialization_detail(request, pk):
 
 @api_view(['GET', 'POST'])
 def document_list(request):
-    kipo = apps.get_app_config('semantic').kipo_ontology.getOntology()
-
     if request.method == 'GET':
         ret_docs = Document.find_all_with_badges()
         return Response(ret_docs)
 
     elif request.method == 'POST':
-        doc = Document(request.data['name'])
+        doc = Document()
+        doc.setProperties("l_name", request.data['name'])
+        doc.setProperties("l_tipo", request.data['tipo'])
         doc.add_equals_to(Placeholder)
         doc.save()
         return Response(doc.to_map())
