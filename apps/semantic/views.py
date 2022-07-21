@@ -1,3 +1,5 @@
+import time
+import logging
 from rest_framework.decorators import api_view
 from rest_framework.decorators import authentication_classes
 from rest_framework.decorators import permission_classes
@@ -6,6 +8,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from apps.semantic.kipo_ontology import KipoOntology
 
+logger = logging.getLogger(__name__)
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
@@ -59,8 +62,16 @@ def get_all_owl_instances(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def sync(request):
-    conn = KipoOntology.getConnection()
-    if not conn.isLoaded():
-        conn.loadConfig()
-    conn.save(sync=True)
-    return Response(status=200)
+    try:
+        start_time = time.time()
+        conn = KipoOntology.getConnection()
+        if not conn.isLoaded():
+            conn.loadConfig(sync=False)
+        conn.save(sync=True)
+        end_time = time.time()
+        return Response({'status': 'done',
+                         'time': round(end_time - start_time, 2)},
+                        status=200)
+    except Exception as e:
+        logger.error(e)
+        return Response(status=500)
