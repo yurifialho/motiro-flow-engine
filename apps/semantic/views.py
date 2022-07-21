@@ -4,7 +4,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from django.apps import apps
+from apps.semantic.kipo_ontology import KipoOntology
 
 
 @api_view(['POST'])
@@ -13,8 +13,8 @@ from django.apps import apps
 def query_sparql(request):
     if request.method == 'POST':
         if request.data["query"]:
-            onto = apps.get_app_config('semantic').kipo_ontology
-            ret = onto.querySPARQL(request.data["query"])
+            conn = KipoOntology.getConnection()
+            ret = conn.querySPARQL(request.data["query"])
             return Response(ret, status=201)
         else:
             return Response(request.data, status=404)
@@ -24,8 +24,8 @@ def query_sparql(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_all_owl_classes(request):
-    onto = apps.get_app_config('semantic').kipo_ontology
-    kipo = onto.getOntology()
+    conn = KipoOntology.getConnection()
+    kipo = conn.getOntology()
     cls_owl = list(kipo.classes())
     listRetorno = []
     for i in cls_owl:
@@ -42,8 +42,8 @@ def get_all_owl_classes(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_all_owl_instances(request):
-    onto = apps.get_app_config('semantic').kipo_ontology
-    kipo = onto.getOntology()
+    conn = KipoOntology.getConnection()
+    kipo = conn.getOntology()
     ind_owl = list(kipo.individuals())
     listRetorno = []
     for i in ind_owl:
@@ -59,5 +59,8 @@ def get_all_owl_instances(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def sync(request):
-    onto = apps.get_app_config('semantic').kipo_ontology
-    onto.sync()
+    conn = KipoOntology.getConnection()
+    if not conn.isLoaded():
+        conn.loadConfig()
+    conn.save(sync=True)
+    return Response(status=200)
