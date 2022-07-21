@@ -73,40 +73,53 @@ class SemanticModel(models.Model):
 class NewSemanticModel:
 
     semanticClass = None
+    #initialProperties = None
+
+    class Meta:
+        abstract = True
 
     def __init__(self) -> None:
         self.owl = None
         self.id = None
         self.storid = None
         self.properties = []
+        #self.initialProperties = []
+
 
     @transaction
     def save(self, sync: bool = False) -> int:
-        if not self.id:
-            self.id = self.generateHashId()
 
-            conn = KipoOntology.getConnection()
-            kipo = conn.getOntology()
+        conn = KipoOntology.getConnection()
+        kipo = conn.getOntology()
 
-            with kipo:
+        with kipo:
+            if self.id is None:
+                self.id = self.generateHashId()
                 owl = kipo[self.semanticClass](self.id)
-                self.storid = owl.storid
-                self.owl = owl
+            else:
+                owl = kipo[self.id]
+            self.storid = owl.storid
+            self.owl = owl
 
-                for prop in self.properties:
-                    conn.generateDataProperty(prop['name'],
-                                              prop['value'])
-                    getattr(owl, prop['name']).append(prop['value'])
+            for prop in self.properties:
+                conn.generateDataProperty(prop['name'],
+                                            prop['value'])
+                owlPropValue = getattr(owl, prop['name'])
+                if owlPropValue is not None and len(owlPropValue) > 0:
+                    owlPropValue.clear()
+                owlPropValue.append(prop['value'])
 
-            conn.save()
+        conn.save()
 
-            if sync:
-                conn.sync()
+        if sync:
+            conn.sync()
 
-            return self.storid
+        return self.storid
 
 
     def setProperties(self, name: str, value) -> None:
+        if type(value) == list:
+            return
         found = False
         for prop in self.properties:
             if prop["name"] == name:
@@ -130,8 +143,10 @@ class NewSemanticModel:
 
     @transaction
     def to_map(self) -> map:
-        mObj = {'storid': self.storid, 'id': self.id}
+        mObj = {}
         if self.id is not None:
+            mObj = {'storid': self.storid, 'id': self.id}
+        
             conn = KipoOntology.getConnection()
             kipo = conn.getOntology()
             with kipo:
@@ -143,6 +158,10 @@ class NewSemanticModel:
                             mObj[prop.name] = propValue[0]
                         else:
                             mObj[prop.name] = ""
+
+        for defProps in self.initialProperties:
+            if defProps not in mObj:
+                mObj[defProps] = ""
 
         return mObj
 
@@ -162,11 +181,16 @@ class NewSemanticModel:
         return hashObj.hexdigest()
 
     @classmethod
+    def getInitialProperties(cls) -> list:
+        logger.info(cls)
+        return cls.initialProperties
+
+    @classmethod
     def getInstance(cls, owl: ThingClass) -> NewSemanticModel:
         if not owl:
             raise ValueError("Owl object is required")
 
-        obj = NewSemanticModel()
+        obj = cls()
         obj.owl = owl
         obj.id = owl.name
         obj.storid = owl.storid
@@ -205,7 +229,7 @@ class NewSemanticModel:
         all = []
         with kipo:
             for owl in kipo[cls.semanticClass].instances():
-                obj = NewSemanticModel.getInstance(owl)
+                obj = cls.getInstance(owl)
                 all.append(obj.to_map())
         return all
 
@@ -217,7 +241,7 @@ class NewSemanticModel:
         all = []
         with kipo:
             for owl in kipo[cls.semanticClass].instances():
-                obj = NewSemanticModel.getInstance(owl)
+                obj = cls.getInstance(owl)
                 objMap = obj.to_map()
                 objMap['badge'] = []
                 for badge in obj.owl.is_a:
