@@ -18,7 +18,7 @@ from apps.kipco.models import Desire
 from apps.kipco.models import Document
 from apps.kipco.models import Placeholder
 from apps.kipco.models import DataObject
-from apps.semantic.serializers import SerializerUtil
+from apps.kipco.models import Attribute
 from apps.kipco.processor import RequestProcessor
 
 logger = logging.getLogger(__name__)
@@ -177,3 +177,16 @@ def data_object_list(request):
 @permission_classes([IsAuthenticated])
 def data_object_detail(request, pk):
     return RequestProcessor.generic_process_detail(Document, request, pk)
+
+@api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def attribute_list(request):
+    return RequestProcessor.generic_process_list(Attribute, request)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def attribute_detail(request, pk):
+    return RequestProcessor.generic_process_detail(Attribute, request, pk)

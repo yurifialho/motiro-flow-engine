@@ -2,6 +2,7 @@ from __future__ import annotations
 import logging
 import hashlib
 from datetime import date, datetime
+from typing import Any
 from django.db import models
 from django.conf import settings
 from django.apps import apps
@@ -9,71 +10,16 @@ from apps.semantic.kipo_ontology import KipoOntology
 from apps.semantic.kipo_ontology import transaction
 from owlready2 import ThingClass
 from owlready2.prop import DataPropertyClass
+from owlready2.prop import ObjectPropertyClass
 
 # ---
 logger = logging.getLogger(__name__)
-
-class SemanticModel(models.Model):
-
-    storid = models.IntegerField(unique=False, blank=True, null=True)
-    semanticClass = 'Thing'
-
-    def listObj(self) -> list:
-        lista = []
-        for k in self.listOwl():
-            lista.append(self.owlToObj(k))
-        return lista
-
-    def listOwl(self) -> list:
-        onto = apps.get_app_config('semantic').kipo_ontology
-        kipo = onto.getOntology()
-        lista = kipo.search(type=self.getSemanticClass())
-        return lista
-
-    def owlToObj(self, owlObj):
-        pg = self.__class__()
-        pg.name = owlObj.name
-        return pg
-
-    def objToOwl(self):
-        onto = apps.get_app_config('semantic').kipo_ontology
-        kipo = onto.getOntology()
-        with kipo:
-            o = self.getSemanticClass()(self.name)
-            self.setIndividualProperties(o)
-            onto.save()
-            return o
-
-    def isExistsIndividual(self) -> bool :
-        if self.getIndividual():
-            return True
-        else:        
-            return False
-
-    def getIndividual(self) :
-        onto = apps.get_app_config('semantic').kipo_ontology
-        kipo = onto.getOntology()
-        for o in kipo.search(type=self.getSemanticClass()):
-            if o.name == self.name:
-                return o
-        return None
-
-    def getSemanticClass(self) :
-        onto = apps.get_app_config('semantic').kipo_ontology
-        kipo = onto.getOntology()
-        return kipo[self.semanticClass]
-
-    def setIndividualProperties(self, owl):
-        pass
-
-    class Meta:
-        abstract = True
 
 
 class NewSemanticModel:
 
     semanticClass = None
-    #initialProperties = None
+    initialProperties = None
 
     class Meta:
         abstract = True
@@ -83,8 +29,7 @@ class NewSemanticModel:
         self.id = None
         self.storid = None
         self.properties = []
-        #self.initialProperties = []
-
+        self.complexProperties = []
 
     @transaction
     def save(self, sync: bool = False) -> int:
@@ -104,10 +49,9 @@ class NewSemanticModel:
             for prop in self.properties:
                 conn.generateDataProperty(prop['name'],
                                             prop['value'])
-                owlPropValue = getattr(owl, prop['name'])
-                if owlPropValue is not None and len(owlPropValue) > 0:
-                    owlPropValue.clear()
-                owlPropValue.append(prop['value'])
+                self.setOwlAttribute(owl, prop['name'], prop['value'])
+            
+            self.processComplexProperties(owl)
 
         conn.save()
 
@@ -117,19 +61,30 @@ class NewSemanticModel:
         return self.storid
 
 
-    def setProperties(self, name: str, value) -> None:
-        if type(value) == list:
-            return
-        found = False
-        for prop in self.properties:
-            if prop["name"] == name:
-                prop["value"] = value
-        if not found:
-            self.properties.append({"name": name, "value": value})
+    def setProperties(self, name: str, value: Any) -> None:
+        if type(value) == list and value is not None:
+            self.setComplexProperties(self.complexProperties,name, value)
+        else:
+            self.setComplexProperties(self.properties, name, value)
 
     def unsetProperties(self, name: str) -> None:
+        for prop in self.complexProperties:
+            if prop['name'] == name:
+                self.setProperties(name, [])
+                return 
         self.setProperties(name, None)
 
+    def setComplexProperties(self, properties: list, name: str, value: list) -> None:
+        found = False
+        for prop in properties:
+            if prop['name'] == name:
+                prop['name'] = value
+        if not found:
+            properties.append({"name": name, "value": value})
+
+    def processComplexProperties(self, owl: ThingClass) -> None:
+        pass
+    
     @transaction
     def delete(self, sync: bool = False):
         conn = KipoOntology.getConnection()
@@ -152,18 +107,24 @@ class NewSemanticModel:
             with kipo:
                 props = kipo[self.id].get_properties()
                 for prop in props:
+                    propValue = getattr(kipo[self.id], prop.name)
                     if type(prop) == DataPropertyClass:
-                        propValue = getattr(kipo[self.id], prop.name)
                         if propValue:
                             mObj[prop.name] = propValue[0]
                         else:
                             mObj[prop.name] = ""
+                    elif type(prop) == ObjectPropertyClass:
+                        self.to_map_complex(mObj, prop.name, propValue)
 
         for defProps in self.initialProperties:
             if defProps not in mObj:
                 mObj[defProps] = ""
 
         return mObj
+
+    @transaction
+    def to_map_complex(self, map: map, prop: str, owl: ThingClass) -> map:
+        pass
 
     @transaction
     def add_equals_to(self, toClass) -> bool:
@@ -173,6 +134,17 @@ class NewSemanticModel:
                                self.storid)
         conn.close()
         return ret
+
+    @classmethod
+    def setOwlAttribute(cls, owl: ThingClass, name: str, value: Any) -> None:
+        owlPropValue = getattr(owl, name)
+        if owlPropValue is not None and len(owlPropValue) > 0:
+            owlPropValue.clear()
+        if type(value) == list:
+            for val in value:
+                owlPropValue.append(val)
+        else:
+            owlPropValue.append(value)
 
     @classmethod
     def generateHashId(cls) -> str:

@@ -44,6 +44,9 @@ urlpatterns = [
     url(r'^data_object/(?P<pk>\b([a-f0-9]{40})\b)/$', views.data_object_detail),
     url(r'^data_object/$', views.data_object_list),
 
+    url(r'^attribute/(?P<pk>\b([a-f0-9]{40})\b)/$', views.attribute_detail),
+    url(r'^attribute/$', views.attribute_list),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

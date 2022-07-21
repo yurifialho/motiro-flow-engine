@@ -1,7 +1,10 @@
-from django.db import models
-from apps.bpmn.models import Activity as BpmnActivity, FlowElementsContainer
-from apps.semantic.models import SemanticModel
+from __future__ import annotations
+import logging
 from apps.semantic.models import NewSemanticModel
+from apps.semantic.kipo_ontology import KipoOntology
+from owlready2 import ThingClass
+
+logger = logging.getLogger(__name__)
 
 class ProcessGoal(NewSemanticModel):
     semanticClass = 'KIPCO__Process_Goal'
@@ -119,9 +122,37 @@ class MessageFlow(NewSemanticModel):
 class Document(NewSemanticModel):
  
     semanticClass = "ODD__Document"
-    initialProperties = ['l_name', 'l_tipo'] 
+    initialProperties = ['l_name', 'l_tipo']
+
+    def processComplexProperties(self, owl: ThingClass) -> None:
+        if self.complexProperties is not None and len(self.complexProperties) > 0:
+            provides = []
+            for prop in self.complexProperties:
+                conn = KipoOntology.getConnection()
+                kipo = conn.getOntology()
+                if prop['name'] == 'data_objects':
+                    for dto in prop['value']:
+                        provides.append(kipo[dto])
+                if prop['name'] == 'attributes':
+                    for att in prop['value']:
+                        provides.append(kipo[att])
+            if len(provides) > 0:
+                self.setOwlAttribute(owl, 'provides', provides)
+    
+    def to_map_complex(self, map: map,  prop: str, owl: ThingClass) -> map:
+        attributes = []
+        data_objects = []
+        if prop == 'provides':
+            for obj in list(owl):
+            logger.info(list(owl)[0].is_a)
+            #logger.info(list(owl.is_a()))
+
+                
 
 
-class Placeholder(SemanticModel):
-
+class Placeholder(NewSemanticModel):
     semanticClass = "ODD__Placeholder"
+
+class Attribute(NewSemanticModel):
+    semanticClass = "ODD__Attribute"
+    initialProperties = ['l_name', 'l_value']

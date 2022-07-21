@@ -24,6 +24,6 @@ class SerializerUtil():
             elif key == 'id' and update_id:
                 obj.id = value
             elif key not in ['storid','id']:
-                if not key.startswith("l_"):
+                if type(value) != list and not key.startswith("l_"):
                     key = f"l_{key}"
                 obj.setProperties(key, value)
