@@ -383,6 +383,8 @@ def agentspecialty_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def agent_list(request):
     if request.method == 'GET':
         items = Agent.objects.order_by('pk')
@@ -398,6 +400,8 @@ def agent_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def agent_detail(request, pk):
     try:
         item = Agent.objects.get(pk=pk)
@@ -421,6 +425,8 @@ def agent_detail(request, pk):
 
 
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def socialization_list(request):
     if request.method == 'GET':
         items = Socialization.objects.order_by('pk')
@@ -436,6 +442,8 @@ def socialization_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def socialization_detail(request, pk):
     try:
         item = Socialization.objects.get(pk=pk)
@@ -458,6 +466,8 @@ def socialization_detail(request, pk):
         return Response(status=204)
 
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def document_list(request):
     if request.method == 'GET':
         ret_docs = Document.find_all_with_badges()
@@ -467,28 +477,34 @@ def document_list(request):
         doc = Document()
         doc.setProperties("l_name", request.data['name'])
         doc.setProperties("l_tipo", request.data['tipo'])
-        doc.add_equals_to(Placeholder)
         doc.save()
+        doc.add_equals_to(Placeholder)
+
         return Response(doc.to_map())
 
-
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def document_detail(request, pk):
-    #try:
-    #    item = Socialization.objects.get(pk=pk)
-    #except Socialization.DoesNotExist:
-    #    return Response(status=404)
+
+    item = Document.find_by_id(pk)
+
+    if item is None:
+        return Response(status=404)
 
     if request.method == 'GET':
-        return Response({}, status=503)
+        return Response(item.to_map())
 
     elif request.method == 'PUT':
         return Response({}, status=504)
 
     elif request.method == 'DELETE':
-        return Response({}, status=505)
+        item.delete()
+        return Response(status=204)
 
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def data_object_list(request):
     if request.method == 'GET':
         items = DataObject.objects.order_by('pk')
@@ -504,6 +520,8 @@ def data_object_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def data_object_detail(request, pk):
     try:
         item = DataObject.objects.get(pk=pk)
