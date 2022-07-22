@@ -63,7 +63,7 @@ class NewSemanticModel:
 
     def setProperties(self, name: str, value: Any) -> None:
         if type(value) == list and value is not None:
-            self.setComplexProperties(self.complexProperties,name, value)
+            self.setComplexProperties(self.complexProperties, name, value)
         else:
             self.setComplexProperties(self.properties, name, value)
 
@@ -84,7 +84,7 @@ class NewSemanticModel:
 
     def processComplexProperties(self, owl: ThingClass) -> None:
         pass
-    
+
     @transaction
     def delete(self, sync: bool = False):
         conn = KipoOntology.getConnection()
@@ -101,7 +101,6 @@ class NewSemanticModel:
         mObj = {}
         if self.id is not None:
             mObj = {'storid': self.storid, 'id': self.id}
-        
             conn = KipoOntology.getConnection()
             kipo = conn.getOntology()
             with kipo:
@@ -125,6 +124,17 @@ class NewSemanticModel:
     @transaction
     def to_map_complex(self, map: map, prop: str, owl: ThingClass) -> map:
         pass
+
+    def prepare_list_complex(self, propName: str, propRef: str, owl: ThingClass, selectedClass: str) -> list:
+        objects = []
+
+        if propRef == propName:
+            for obj in list(owl):
+                for is_a in obj.is_a:
+                    if is_a.name == selectedClass:
+                        objects.append(obj.name)
+                    
+        return objects
 
     @transaction
     def add_equals_to(self, toClass) -> bool:

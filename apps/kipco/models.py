@@ -39,6 +39,29 @@ class DataObject(NewSemanticModel):
     semanticClass = "BPO__Data_Object"
     initialProperties = ['l_name', 'l_description']
 
+    def processComplexProperties(self, owl: ThingClass) -> None:
+        if self.complexProperties is not None and len(self.complexProperties) > 0:
+            composed_by = []
+            consists_of = []
+            for prop in self.complexProperties:
+                conn = KipoOntology.getConnection()
+                kipo = conn.getOntology()
+                if prop['name'] == 'data_objects':
+                    for dto in prop['value']:
+                        composed_by.append(kipo[dto])
+                if prop['name'] == 'attributes':
+                    for att in prop['value']:
+                        consists_of.append(kipo[att])
+            if len(composed_by) > 0:
+                self.setOwlAttribute(owl, 'composed_by', composed_by)
+            if len(consists_of) > 0:
+                self.setOwlAttribute(owl, 'consists_of', consists_of)
+
+    def to_map_complex(self, map: map,  prop: str, owl: ThingClass) -> map:
+        map["attributes"] = self.prepare_list_complex('consists_of', prop, owl,  Attribute.semanticClass)
+        map["data_objects"] = self.prepare_list_complex('composed_by', prop, owl,  DataObject.semanticClass)
+        return map
+
 
 class Message(NewSemanticModel):
     semanticClass = "CO__COM__Message"
@@ -138,16 +161,11 @@ class Document(NewSemanticModel):
                         provides.append(kipo[att])
             if len(provides) > 0:
                 self.setOwlAttribute(owl, 'provides', provides)
-    
-    def to_map_complex(self, map: map,  prop: str, owl: ThingClass) -> map:
-        attributes = []
-        data_objects = []
-        if prop == 'provides':
-            for obj in list(owl):
-            logger.info(list(owl)[0].is_a)
-            #logger.info(list(owl.is_a()))
 
-                
+    def to_map_complex(self, map: map,  prop: str, owl: ThingClass) -> map:
+        map["attributes"] = self.prepare_list_complex('provides', prop, owl,  Attribute.semanticClass)
+        map["data_objects"] = self.prepare_list_complex('provides', prop, owl,  DataObject.semanticClass)
+        return map
 
 
 class Placeholder(NewSemanticModel):
