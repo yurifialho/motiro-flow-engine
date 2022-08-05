@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^socialization/(?P<pk>\b([a-f0-9]{40})\b)/$', views.socialization_detail),
     url(r'^socialization/$', views.socialization_list),
 
+    url(r'^document/(?P<pk>\b([a-f0-9]{40})\b)/badges/$', views.document_badges),
     url(r'^document/(?P<pk>\b([a-f0-9]{40})\b)/$', views.document_detail),
     url(r'^document/$', views.document_list),
 

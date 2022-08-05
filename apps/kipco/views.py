@@ -157,7 +157,7 @@ def socialization_detail(request, pk):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def document_list(request):
-    return RequestProcessor.generic_process_list(Document, request)
+    return RequestProcessor.generic_process_list(Document, request, isPlaceHolder=True)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @authentication_classes([TokenAuthentication])
@@ -165,11 +165,17 @@ def document_list(request):
 def document_detail(request, pk):
     return RequestProcessor.generic_process_detail(Document, request, pk)
 
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def document_badges(request, pk):
+    return RequestProcessor.generic_process_badges(Document, request, pk)
+
 @api_view(['GET', 'POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def data_object_list(request):
-    return RequestProcessor.generic_process_list(DataObject, request)
+    return RequestProcessor.generic_process_list(DataObject, request, isPlaceHolder=True)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -182,7 +188,7 @@ def data_object_detail(request, pk):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def attribute_list(request):
-    return RequestProcessor.generic_process_list(Attribute, request)
+    return RequestProcessor.generic_process_list(Attribute, request, isPlaceHolder=True)
 
 
 @api_view(['GET', 'PUT', 'DELETE'])

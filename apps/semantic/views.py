@@ -75,3 +75,28 @@ def sync(request):
     except Exception as e:
         logger.error(e)
         return Response(status=500)
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def force_delete(request):
+    conn = None
+    try:
+        id = request.data["id"]
+        if id is not None:
+            conn = KipoOntology.getConnection()
+            kipo = conn.getOntology()
+            with kipo:
+                owl = kipo[id]
+                if owl is not None:
+                    conn.delete(owl)
+                    conn.save()
+            return Response(status=200)
+        else:
+            return Response(status=404)
+    except Exception as e:
+        logger.error(e)
+        return Response(status=500)
+    finally:
+        if conn is not None:
+            conn.close()

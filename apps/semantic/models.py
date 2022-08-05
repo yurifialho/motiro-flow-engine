@@ -1,11 +1,8 @@
 from __future__ import annotations
 import logging
 import hashlib
-from datetime import date, datetime
+from datetime import datetime
 from typing import Any
-from django.db import models
-from django.conf import settings
-from django.apps import apps
 from apps.semantic.kipo_ontology import KipoOntology
 from apps.semantic.kipo_ontology import transaction
 from owlready2 import ThingClass
@@ -113,8 +110,9 @@ class NewSemanticModel:
                         else:
                             mObj[prop.name] = ""
                     elif type(prop) == ObjectPropertyClass:
-                        self.to_map_complex(mObj, prop.name, propValue)
-
+                        if propValue is not None:
+                            self.to_map_complex(mObj, prop.name, propValue, False)
+            self.to_map_complex(mObj, None, None, True)
         for defProps in self.initialProperties:
             if defProps not in mObj:
                 mObj[defProps] = ""
@@ -122,18 +120,16 @@ class NewSemanticModel:
         return mObj
 
     @transaction
-    def to_map_complex(self, map: map, prop: str, owl: ThingClass) -> map:
+    def to_map_complex(self, map: map, prop: str, owl: ThingClass, isComplement: bool = False) -> map:
         pass
 
     def prepare_list_complex(self, propName: str, propRef: str, owl: ThingClass, selectedClass: str) -> list:
-        objects = []
-
+        objects = set()
         if propRef == propName:
             for obj in list(owl):
-                for is_a in obj.is_a:
+                for is_a in obj.is_a:   
                     if is_a.name == selectedClass:
-                        objects.append(obj.name)
-                    
+                        objects.add(obj.name)
         return objects
 
     @transaction
@@ -205,6 +201,23 @@ class NewSemanticModel:
 
     @classmethod
     @transaction
+    def get_badges_by_id(cls, id: str) -> list:
+        conn = KipoOntology.getConnection()
+        kipo = conn.getOntology()
+        badges = set()
+        with kipo:
+            owl = kipo[id]
+            if owl is not None:
+                for badge in owl.is_a:
+                    logger.debug(f"Badge for {id} is {badge.name}")
+                    if badge.name not in badges:
+                        badges.add(badge.name)
+
+
+        return badges
+
+    @classmethod
+    @transaction
     def find_all(cls) -> list:
         conn = KipoOntology.getConnection()
         kipo = conn.getOntology()
@@ -225,11 +238,11 @@ class NewSemanticModel:
             for owl in kipo[cls.semanticClass].instances():
                 obj = cls.getInstance(owl)
                 objMap = obj.to_map()
-                objMap['badge'] = []
+                objMap['badges'] = []
                 for badge in obj.owl.is_a:
                     logger.debug(f"Badge for {obj.id} is {badge.name}")
-                    if badge.name not in objMap['badge']:
-                        objMap['badge'].append(badge.name)
+                    if badge.name not in objMap['badges']:
+                        objMap['badges'].append(badge.name)
                 all.append(objMap)
 
         return all

@@ -57,9 +57,19 @@ class DataObject(NewSemanticModel):
             if len(consists_of) > 0:
                 self.setOwlAttribute(owl, 'consists_of', consists_of)
 
-    def to_map_complex(self, map: map,  prop: str, owl: ThingClass) -> map:
-        map["attributes"] = self.prepare_list_complex('consists_of', prop, owl,  Attribute.semanticClass)
-        map["data_objects"] = self.prepare_list_complex('composed_by', prop, owl,  DataObject.semanticClass)
+    def to_map_complex(self, map: map,  prop: str, owl: ThingClass, isComplement: bool = False) -> map:
+        if "attributes" not in map:
+            map["attributes"] = set()
+        
+        if not isComplement:
+            map["attributes"].update(self.prepare_list_complex('consists_of', prop, owl,  Attribute.semanticClass))
+        
+        if "data_objects" not in map:
+            map["data_objects"] = set()
+        
+        if not isComplement:
+            map["data_objects"].update(self.prepare_list_complex('composed_by', prop, owl,  DataObject.semanticClass))
+
         return map
 
 
@@ -145,9 +155,10 @@ class MessageFlow(NewSemanticModel):
 class Document(NewSemanticModel):
  
     semanticClass = "ODD__Document"
-    initialProperties = ['l_name', 'l_tipo']
+    initialProperties = ['l_name','l_description', 'l_type']
 
     def processComplexProperties(self, owl: ThingClass) -> None:
+        logger.info(self.complexProperties)
         if self.complexProperties is not None and len(self.complexProperties) > 0:
             provides = []
             for prop in self.complexProperties:
@@ -160,11 +171,22 @@ class Document(NewSemanticModel):
                     for att in prop['value']:
                         provides.append(kipo[att])
             if len(provides) > 0:
+                logger.info(provides)
                 self.setOwlAttribute(owl, 'provides', provides)
 
-    def to_map_complex(self, map: map,  prop: str, owl: ThingClass) -> map:
-        map["attributes"] = self.prepare_list_complex('provides', prop, owl,  Attribute.semanticClass)
-        map["data_objects"] = self.prepare_list_complex('provides', prop, owl,  DataObject.semanticClass)
+    def to_map_complex(self, map: map,  prop: str, owl: ThingClass, isComplement: bool = False) -> map:
+        if "attributes" not in map:
+            map["attributes"] = set()
+        
+        if not isComplement:
+            map["attributes"].update(self.prepare_list_complex('provides', prop, owl,  Attribute.semanticClass))
+        
+        if "data_objects" not in map:
+            map["data_objects"] = set()
+        
+        if not isComplement:
+            map["data_objects"].update(self.prepare_list_complex('provides', prop, owl,  DataObject.semanticClass))
+
         return map
 
 
